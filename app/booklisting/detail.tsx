@@ -1,10 +1,29 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import Image from "next/image"
 import { DemoData } from '@/constant/data'
 import { SidebarComponent } from './sidebarcomponent'
 import { Grid2X2, AlignVerticalSpaceAround, SearchCode } from "lucide-react"
 import { InputSearchComponent } from '../component/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 export const BookListingDetail = () => {
+
+    const [selectedCategory, setSelectedCategory] = useState('')
+
+    const categories = [
+        {
+            _id: 1,
+            name: "Educatinal Technology"
+        },
+        {
+            _id: 2,
+            name: "Educatinal Technology"
+        },
+        {
+            _id: 3,
+            name: "Educatinal Technology"
+        },
+    ]
     return (
         <div className='w-[90%] mx-auto mt-10'>
 
@@ -19,10 +38,10 @@ export const BookListingDetail = () => {
                 </div>
 
                 <div>
-                    <div className='flex justify-between items-center pb-2'>
+                    <div className='flex justify-between items-center pb-4'>
 
                         <div className='flex items-center gap-x-4'>
-                            <div className='flex gap-x-6 items-center pb-4'>
+                            <div className='flex gap-x-6 '>
                                 <Grid2X2 className="h-6 w-6" />
                                 <AlignVerticalSpaceAround className="h-6 w-6" />
                             </div>
@@ -32,11 +51,22 @@ export const BookListingDetail = () => {
                             } />
                         </div>
 
+                        <div className='w-60'>
+                            <Select onValueChange={(val: any) => setSelectedCategory(val)}>
+                                <SelectTrigger className="">
+                                    <SelectValue placeholder="Select Category" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {categories?.map((supervisor: any) => (
+                                        <SelectItem key={supervisor.name} value={supervisor._id}>
+                                            {supervisor.name}
 
-                        <InputSearchComponent type="text" placeholder='Searching..' icon={
-                            <AlignVerticalSpaceAround className="h-6 w-6" />
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
 
-                        } />
 
                     </div>
 

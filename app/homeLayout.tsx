@@ -4,13 +4,19 @@ import { MdLogin } from "react-icons/md";
 import { useState } from 'react';
 import { Menubar, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar';
 import Link from 'next/link';
+import { SignInForm } from './(auth)/signin';
+import { ResponsiveDrawerDialog } from './components/modal/responsivedrawer';
+import { SignUpForm } from './(auth)/signup';
 
-const HomeLayout = () => {
-    const [open, setOpen] = useState(false);
+interface IProps {
+    handleCloseModal: () => void;
+    handleOpenModal: () => void;
+    open: boolean
+}
 
-    const handleModal = () => {
-        setOpen(false)
-    }
+const HomeLayout = ({ handleOpenModal, handleCloseModal, open }: IProps) => {
+    const [toggle, setToggle] = useState(false);
+
 
     return (
         <div className="bg-slate-300">
@@ -30,17 +36,48 @@ const HomeLayout = () => {
                 </div>
                 <div className="pl-4 flex space-x-4">
 
-                    <div onClick={() => setOpen(false)}>
-                        <MlButton icon={<MdLogin />} className="border-2 border-[#C9CED6] ">
+                    <div onClick={() => {
+                        handleOpenModal();
+                        setToggle(true)
+                    }}>
+                        <MlButton icon={<MdLogin />} className="border-2 border-[#C9CED6] hover:bg-orange-400 hover:text-white">
                             <h4>Login</h4>
                         </MlButton>
                     </div>
 
-                    <MlButton className='bg-white text-orange-400 border-none hidden md:flex lg:flex'>Register Now</MlButton>
+                    <MlButton onClick={() => {
+                        handleOpenModal();
+                        setToggle(false)
+                    }} className='bg-orange-400 text-white border-none hidden md:flex lg:flex hover:text-orange-400 hover:bg-white'>Register Now</MlButton>
 
                 </div>
 
             </div>
+
+            <ResponsiveDrawerDialog
+                title="Login/Register"
+                description="Let's the journey begins!"
+                isOpen={open}
+                onClose={handleCloseModal}
+            >
+
+
+                {
+                    toggle ? (
+                        <SignInForm />
+
+                    ) : (
+                        <SignUpForm />
+
+                    )
+                }
+
+
+
+
+
+
+            </ResponsiveDrawerDialog>
         </div>
     );
 };

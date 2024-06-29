@@ -1,22 +1,32 @@
-// components/Button.tsx
-import React from 'react';
+import React, { useState } from 'react';
+// import RingSpinner from '../loader/circlering';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: React.ReactNode;
     children: React.ReactNode;
     className?: string;
+    loading?: boolean;
 }
 
-const MlButton: React.FC<ButtonProps> = ({ icon, children, className = '', ...props }) => {
+const CustomButton: React.FC<ButtonProps> = ({ icon, children, className = '', loading = false, ...props }) => {
     return (
         <button
-            className={`flex items-center justify-center px-6 py-2 border border-white text-md font-medium rounded-full text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${className}`}
+            className={`flex items-center justify-center px-6 py-2 border border-white text-md font-medium rounded-md w-full bg-orange-400 text-white my-4 hover:bg-orange-200 hover:text-customPrimary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${className}`}
+            disabled={loading}
             {...props}
         >
-            {icon && <span className="mr-2">{icon}</span>}
-            {children}
+            {loading ? (
+                <span className="loader"></span>
+                // <RingSpinner />
+
+            ) : (
+                <>
+                    {/* {icon && <span className="mr-2">{icon}</span>} */}
+                    {children}
+                </>
+            )}
         </button>
     );
 };
 
-export default MlButton;
+export default CustomButton;
