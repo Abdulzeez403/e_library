@@ -9,11 +9,11 @@ export const BestDownload = () => {
     return (
         <div className='bg-slate-300 py-10'>
 
-            <div className='w-[60%] mx-auto'>
+            <div className='w-full md:w-[60%] lg:w-[60%] mx-auto'>
                 <div className='flex justify-center'>
-                    <div className='flex justify-between items-center'>
+                    <div className='block md:flex lg:flex justify-between items-center'>
 
-                        <div>
+                        <div className="flex justify-center items-center">
                             <motion.div
                                 style={{
                                     display: 'inline-block',
@@ -30,8 +30,8 @@ export const BestDownload = () => {
                             </motion.div>
                         </div>
 
-                        <div className='w-[50%] text-center'>
-                            <h4 className='text-bold text-[2rem]'>Best Download of the Week!</h4>
+                        <div className='w-full px-10 md:w-[50%] lg:w-[50%] text-center'>
+                            <h4 className='font-bold text-[1.5rem]'>Best Download of the Week!</h4>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A beatae laborum nostrum placeat, animi culpa impedit assumenda explicabo fugiat excepturi.</p>
                             <Button className='bg-orange-500 my-4'>Download</Button>
 

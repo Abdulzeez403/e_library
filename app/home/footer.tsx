@@ -7,8 +7,7 @@ export const Footer = () => {
 
             <div className="w-[70%] text-center">
                 <h4 className="py-4 text-white text-bold">Site Name</h4>
-                <p className="text-white">Discover a world of knowledge and inspiration. Dive into our vast collection of books spanning education, art, science, engineering, and more. Whether you
-                    &aposre seeking to learn, create, or innovate, our e-library offers a curated selection of resources to fuel your journey. Explore, read, and grow with us. Welcome to the future of reading.</p>
+                <p className="text-white w-[100%]">Discover a world of knowledge and inspiration. Dive into our vast collection of books spanning education, art, science, engineering, and more. Whether</p>
                 <div className="flex justify-center">
                     <Menubar className='border-none bg-black'>
                         <MenubarMenu>
