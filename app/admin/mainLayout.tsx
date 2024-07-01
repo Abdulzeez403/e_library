@@ -9,12 +9,9 @@ import { FaUserTie } from "react-icons/fa6";
 import { PiExam } from "react-icons/pi";
 import User from "../../../public/user.png"
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Home, Package, Package2, PanelLeft, ShoppingCart, Users2 } from 'lucide-react';
+import { LibraryBig } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-// import { SheetTrigger, SheetContent, Sheet } from '@/components/ui/sheet';
-// import { useAuthContext } from '@/app/(auth)/context';
 import { LuHome } from "react-icons/lu";
-// import Cookies from 'universal-cookie';
 
 
 interface IProps {
@@ -144,6 +141,13 @@ export const SidebarComponent = ({ children }: IProps) => {
                             <CustomMenuItem
                                 link={"/admin/shelf"}
                                 title="Shelf"
+                                suffix
+                                icon={<LibraryBig className="w-6 h-6" />}
+                            />
+
+                            <CustomMenuItem
+                                link={"/admin/profile"}
+                                title="Profile"
                                 suffix
                                 icon={<FaUserTie color="primary" />}
                             />

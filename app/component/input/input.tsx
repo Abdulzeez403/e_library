@@ -9,15 +9,15 @@ interface FormFieldProps {
     type?: string;
     id?: string;
     className?: string;
-    // onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const FormField: React.FC<FormFieldProps> = ({ label, name, type = 'text', id, className }) => {
+export const FormField: React.FC<FormFieldProps> = ({ label, name, type = 'text', id, className, onChange }) => {
     return (
         <div className={className}>
             <Label htmlFor={id || name}>{label}</Label>
             <Field as={Input} type={type} name={name} id={id || name}
-            //  onChange={onChange}
+                onChange={onChange}
             />
             <ErrorMessage name={name} component="div" className="text-red-600" />
         </div>

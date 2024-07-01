@@ -15,7 +15,7 @@ const HomePage = () => {
             <Newarrrival />
             <BestDownload />
             <AllBooks />
-            <Thebest />
+            {/* <Thebest /> */}
             <Footer />
         </div>
     )

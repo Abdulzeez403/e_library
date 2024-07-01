@@ -9,6 +9,7 @@ import { ResponsiveDrawerDialog } from './components/modal/responsivedrawer';
 import { SignUpForm } from './(auth)/signup';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
+import { Button } from '@/components/ui/button';
 
 
 interface IProps {
@@ -41,19 +42,20 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open }: IProps) => {
 
                     <div className="pl-4 flex space-x-4">
 
-                        <div onClick={() => {
-                            handleOpenModal();
-                            setToggle(true)
-                        }}>
-                            <MlButton icon={<MdLogin />} className="border-2 border-[#C9CED6] bg-white text-orange-400 hover:bg-orange-400 hover:text-white">
-                                <h4>Login</h4>
-                            </MlButton>
-                        </div>
+                        <Button
+                            onClick={() => {
+                                handleOpenModal();
+                                setToggle(true)
+                            }} className=" bg-white text-orange-400 hover:bg-orange-400 hover:text-white">
+                            Login
+                        </Button>
 
-                        <MlButton onClick={() => {
+
+                        <Button onClick={() => {
                             handleOpenModal();
                             setToggle(false)
-                        }} className='bg-orange-400 text-white border-none hidden md:flex lg:flex hover:text-orange-400 hover:bg-white'>Register Now</MlButton>
+                        }} className='bg-orange-400 text-white border-none hidden md:flex lg:flex hover:text-orange-400 hover:bg-white'>Register Now</Button>
+
 
                     </div>
                 </div>

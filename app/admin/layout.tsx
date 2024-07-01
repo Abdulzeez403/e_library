@@ -10,7 +10,7 @@ export default function AdminLayout({ children }: IProps) {
     return (
         <div>
             <SidebarComponent>
-                <div className=' '>
+                <div className=' bg-slate-2000 '>
                     {children}
 
                 </div>

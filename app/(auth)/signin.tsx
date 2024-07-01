@@ -1,11 +1,10 @@
-// components/AdminForm.tsx
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-// import { FormField } from '../components/textInput/textInput';
-// import { useAuthContext } from './context';
 import { FormField } from '../component/input/textInput';
 import CustomButton from '../components/button';
+import { useAuthContext } from './context';
+
 
 
 interface SignInFormValues {
@@ -27,7 +26,7 @@ const SignInFormValues = Yup.object().shape({
 });
 
 export const SignInForm: React.FC = () => {
-    // const { signIn } = useAuthContext()
+    const { signIn, loading } = useAuthContext()
 
     const initialValues: SignInFormValues = {
         email: '',
@@ -36,8 +35,8 @@ export const SignInForm: React.FC = () => {
     };
 
     const handleSubmit = async (values: SignInFormValues) => {
-        // await signIn(values)
-        // window.location.reload();
+        await signIn(values)
+        window.location.reload();
         console.log(values);
     };
 
@@ -56,7 +55,7 @@ export const SignInForm: React.FC = () => {
 
 
                     <div>
-                        <CustomButton type="submit">
+                        <CustomButton type="submit" loading={loading}>
                             SignIn
                         </CustomButton>
 

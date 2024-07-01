@@ -71,3 +71,13 @@ export const categories = [
     { name: 'Science', count: 15 },
     { name: 'Engineering', count: 20 },
 ];
+
+export interface IUser {
+    name: string,
+    password: string,
+    email: string,
+    gender: string,
+    phone: string,
+    role?: string
+
+}
