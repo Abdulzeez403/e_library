@@ -8,6 +8,7 @@ import { UsersContext } from "./context";
 import { DocumentProvider } from "./admin/upload/context";
 import { AdminAuthProvider } from "./(adminauth)/adminLogin/context";
 import { CategoryProvider } from "./admin/upload/categorycontext";
+import { AdminProvider } from "./admin/profile/context";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -25,15 +26,19 @@ export default function RootLayout({
         <html lang="en">
             <AuthProvider>
                 <AdminAuthProvider>
-                    <UsersContext>
-                        <DocumentProvider>
-                            <CategoryProvider>
-                                <Notification />
-                                <body>{children}</body>
-                            </CategoryProvider>
+                    <AdminProvider>
 
-                        </DocumentProvider>
-                    </UsersContext>
+                        <UsersContext>
+                            <DocumentProvider>
+                                <CategoryProvider>
+                                    <Notification />
+                                    <body>{children}</body>
+                                </CategoryProvider>
+
+                            </DocumentProvider>
+                        </UsersContext>
+                    </AdminProvider>
+
                 </AdminAuthProvider>
 
             </AuthProvider>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { notify } from '@/app/components/toast';
 
-const API_BASE_URL = 'https://your-api-url.com'; // Replace with your actual API base URL
+
 
 // Define the shape of a category
 interface Category {
@@ -104,13 +104,16 @@ export const CategoryProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // Update a category by ID
     const updateCategoryById = async (id: string, name: string) => {
         try {
-            await axios.put(`${API_BASE_URL}/category/${id}`, name, {
+            const response = await axios.put(`${API_BASE_URL}/category/${id}`, name, {
                 headers: {
                     'x-auth-token': token
                 }
             });
+            notify.success(response.data.msg);
             getAllCategories(); // Refresh the categories list after update
         } catch (error) {
+            handleAxiosError(error);
+
             console.error('Error updating category by ID:', error);
         }
     };
@@ -118,13 +121,16 @@ export const CategoryProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // Delete a category by ID
     const deleteCategoryById = async (id: string) => {
         try {
-            await axios.delete(`${API_BASE_URL}/category/${id}`, {
+            const response = await axios.delete(`${API_BASE_URL}/category/${id}`, {
                 headers: {
                     'x-auth-token': token
                 }
             });
+            notify.success(response.data.msg);
             getAllCategories(); // Refresh the categories list after deletion
         } catch (error) {
+            handleAxiosError(error);
+
             console.error('Error deleting category by ID:', error);
         }
     };

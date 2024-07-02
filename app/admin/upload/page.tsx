@@ -28,6 +28,11 @@ export default function Page() {
 
     return (
         <div className="p-6">
+            <div>
+                <h4 className='font-bold'>UpLoadDocument</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et maiores distinctio </p>
+
+            </div>
             <div className="flex justify-end">
                 <Button onClick={handleOpenModal}> Add Categroy </Button>
             </div>
@@ -49,8 +54,8 @@ export default function Page() {
                                 <h4>{c.name}</h4>
 
                                 <div className="flex gap-x-4">
-                                    <FilePenLine color="skyblue" className="h-4 w-4" onClick={() => { updateCategoryById(c?.name, c._id) }} />
-                                    <Trash2 color="red" className="h-4 w-4 "
+                                    <FilePenLine color="skyblue" className="h-4 w-4 cursor-pointer" onClick={() => { updateCategoryById(c?.name, c._id) }} />
+                                    <Trash2 color="red" className="h-4 w-4  cursor-pointer "
                                         onClick={() => { deleteCategoryById(c?._id) }} />
 
                                 </div>

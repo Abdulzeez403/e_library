@@ -5,7 +5,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { categories } from '@/constant/data';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { SketchPicker } from 'react-color'; // Make sure to install react-color
 import { useDocumentContext } from './context';
 import { useCategoryContext } from './categorycontext';
 
@@ -153,7 +152,7 @@ export const UploadDetail = () => {
                 )}
             </Formik>
 
-            <div className="border-2 p-2 rounded-md flex justify-center items-center bg-white rounded-md">
+            <div className="border-2 p-2 rounded-md flex justify-center items-center bg-white">
                 <div className={`w-70 h-[400px] rounded-md mx-4 ${selectedColor}`}>
                     <div className="w-60 bg-red-300">
                         <div className="mt-30">

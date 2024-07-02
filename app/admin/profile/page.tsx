@@ -1,13 +1,19 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from "next/image"
 import { Button } from '@/components/ui/button'
 import { ResponsiveDrawerDialog } from '@/app/components/modal/responsivedrawer';
 import { UpdateForm } from './updateform';
+import { useAdminContext } from './context';
 
 export default function Page() {
 
     const [open, setOpen] = useState(false);
+
+    const { getAdminProfile } = useAdminContext()
+    useEffect(() => {
+        getAdminProfile()
+    }, [])
 
     const handleCloseModal = () => {
         setOpen(false)

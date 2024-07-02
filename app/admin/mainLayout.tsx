@@ -55,7 +55,7 @@ export const SidebarComponent = ({ children }: IProps) => {
         return (
             <Link href={link} legacyBehavior >
                 <MenuItem icon={icon}
-                    className={`py-[-1rem] hover:text-customPrimary ${isActive ? ' bg-white text-black' : 'text-black'}`} >
+                    className={`py-[-1rem] hover:text-customPrimary ${isActive ? ' bg-orange-200 text-white' : 'text-black'}`} >
                     <span className='text-semibold '>{title}</span>
                     {suffix && <span style={{ marginLeft: 'auto', color: "red", backgroundColor: "red" }}>{suffix}</span>}
                 </MenuItem>
@@ -117,7 +117,7 @@ export const SidebarComponent = ({ children }: IProps) => {
 
 
                         <div>
-                            <h4 className="text-white font-bold text-[1.5rem] py-4 text-center">
+                            <h4 className="text-orange-200 font-bold text-[1.5rem] py-4 text-center">
                                 E-Library
 
                             </h4>
