@@ -25,12 +25,12 @@ const books = [
 
 export const MySelfDetail = () => {
     return (
-        <div className="bg-slate-300 p-4">
+        <div className=" p-4">
             <div className=" p-4 rounded-md mb-4 flex justify-between items-center">
                 <h4 className="font-bold w-1/5">Book</h4>
                 <h4 className="font-bold w-1/5">Category</h4>
-                <h4 className="font-bold w-1/5">Availability</h4>
-                <h4 className="font-bold w-1/5">Status</h4>
+                <h4 className="font-bold w-1/5">Code</h4>
+                {/* <h4 className="font-bold w-1/5">Status</h4> */}
                 <h4 className="font-bold w-1/5">Actions</h4>
             </div>
             {books.map((book) => (
@@ -48,9 +48,9 @@ export const MySelfDetail = () => {
                     <div className="w-1/5">
                         <p className="text-sm text-gray-600 tex">{book.availability}</p>
                     </div>
-                    <div className="w-1/5">
+                    {/* <div className="w-1/5">
                         <p className="text-sm text-gray-600 ">{book.status}</p>
-                    </div>
+                    </div> */}
                     <div className="w-1/5 block space-y-2">
                         <Button>Preview</Button>
                         <Button>Download</Button>

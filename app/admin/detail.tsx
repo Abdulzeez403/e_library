@@ -41,9 +41,5 @@ export const Detail = () => {
     )
 }
 
-//  Total User
-// Total Document
-// Total Category
-// Total Reading
-// Total Download
+
 

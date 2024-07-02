@@ -77,7 +77,16 @@ export interface IUser {
     password: string,
     email: string,
     gender: string,
-    phone: string,
+    phone?: string,
+    role?: string
+
+}
+
+export interface IAdmin {
+    name: string,
+    password: string,
+    email: string,
+    gender: string,
     role?: string
 
 }

@@ -1,120 +1,170 @@
-"use client"
-import { FormField } from '@/app/component/input/input'
-import CustomButton from '@/app/components/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { categories } from '@/constant/data'
-import { Form, Formik, FormikHelpers } from 'formik'
-import React, { useState } from 'react'
-
+"use client";
+import { FormField } from '@/app/component/input/input';
+import CustomButton from '@/app/components/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { categories } from '@/constant/data';
+import { Field, Form, Formik, FormikHelpers } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { SketchPicker } from 'react-color'; // Make sure to install react-color
+import { useDocumentContext } from './context';
+import { useCategoryContext } from './categorycontext';
 
 interface FormValues {
     title: string;
     code: string;
     category: string;
+    cover: string;
+    description: string;
+    document: File | null;
 }
 
 export const UploadDetail = () => {
-
-    const [selectedCategory, setSelectedCategory] = useState('')
-    const [selectedTitle, setSelectedTitle] = useState("")
-    const [selectedCode, setSelectedCode] = useState("")
+    const { uploadDocument, loading } = useDocumentContext()
+    const { getAllCategories, categories } = useCategoryContext()
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedTitle, setSelectedTitle] = useState('');
+    const [selectedCode, setSelectedCode] = useState('');
     const [selectedColor, setSelectedColor] = useState<string>('bg-blue-300');
+    const [coverPreview, setCoverPreview] = useState<string | null>(null);
+    const [documentFileName, setDocumentFileName] = useState<string | null>(null);
 
-    const categories = [
-        {
-            _id: 1,
-            name: "Educatinal Technology"
-        },
-        {
-            _id: 2,
-            name: "Educatinal Technology"
-        },
-        {
-            _id: 3,
-            name: "Educatinal Technology"
-        },
-    ]
+
 
     const initialValues: FormValues = {
-        title: "",
-        code: "",
-        category: ''
-    }
-    const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
-        console.log(values)
-    }
-    return (
-        <div className='flex gap-x-40 items-center'>
+        title: '',
+        code: '',
+        category: '',
+        cover: '',
+        description: '',
+        document: null,
+    };
 
+    useEffect(() => {
+        getAllCategories()
+    }, [])
+
+
+
+    const handleSubmit = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
+        try {
+            const payload = { ...values, category: selectedCategory }
+            await uploadDocument(payload as any);
+            actions.resetForm();
+            setDocumentFileName(null);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
+
+    const handleDocumentChange = (e: React.ChangeEvent<HTMLInputElement>, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void) => {
+        const file = e.target.files?.[0] || null;
+        setFieldValue('document', file);
+        setDocumentFileName(file ? file.name : null);
+    };
+
+    return (
+        <div className="flex gap-x-40">
             <Formik
                 initialValues={initialValues}
-                // validationSchema={SignInFormValues}
                 onSubmit={handleSubmit}
             >
-                {({ values, handleChange, isSubmitting }) => (
-                    <Form className="w-[60%]">
-
-
-                        <FormField label="Title" name="title" className="my-4"
+                {({ values, handleChange, setFieldValue, isSubmitting }) => (
+                    <Form className="w-[50%] border-2 rounded-md p-4 bg-white px-4">
+                        <FormField
+                            label="Title"
+                            name="title"
+                            className="my-4"
                             onChange={(e) => {
                                 handleChange(e);
                                 setSelectedTitle(e.target.value);
-                            }} />
-                        <FormField label="Code" name="code"
+                            }}
+                        />
+                        <FormField
+                            label="Code"
+                            name="code"
                             onChange={(e) => {
                                 handleChange(e);
                                 setSelectedCode(e.target.value);
-                            }} />
-
-                        <div className='my-4'>
+                            }}
+                        />
+                        <div className="my-4">
                             <Select onValueChange={(val: any) => setSelectedCategory(val)}>
                                 <SelectTrigger className="">
                                     <SelectValue placeholder="Select Category" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {categories?.map((supervisor: any) => (
-                                        <SelectItem key={supervisor.name} value={supervisor._id}>
-                                            {supervisor.name}
-
+                                    {categories?.map((c: any) => (
+                                        <SelectItem key={c.name} value={c.name}>
+                                            {c.name}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
                         </div>
-                        <FormField label="Code" name="code" type="password" />
 
+                        <FormField
+                            label="Cover"
+                            name="cover"
+                            onChange={(e) => {
+                                handleChange(e);
+                                setSelectedColor(e.target.value);
+                            }}
+                        />
+
+                        <div className="my-4">
+                            <label htmlFor="description" className='font-semibold'>Description</label>
+                            <Field name="description" as="textarea" className="w-full h-24 border-2" />
+                        </div>
+
+                        {/* <FormField
+                            label="Description"
+                            name="description"
+                            type="textarea"
+                            onChange={handleChange}
+                        /> */}
+                        <div className="pt-2">
+                            <label htmlFor="document" className=" text-sm font-medium text-gray-700 hidden">Document</label>
+                            <div className="flex items-center">
+                                <input
+                                    id="document"
+                                    name="document"
+                                    type="file"
+                                    className="hidden"
+
+                                    onChange={(e) => handleDocumentChange(e, setFieldValue)}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => document.getElementById('document')?.click()}
+                                    className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                >
+                                    Choose File
+                                </button>
+                                {documentFileName}
+                            </div>
+                        </div>
 
                         <div>
-                            <CustomButton type="submit">
+                            <CustomButton type="submit" loading={loading}>
                                 Upload
                             </CustomButton>
-
                         </div>
                     </Form>
                 )}
             </Formik>
 
-
-            <div className="border-2 p-2 rounded-md flex justify-center items-center">
-
-                <div className={`w-60 h-[400px] rounded-md mx-4 ${selectedColor}`}>
-                    <div className='w-60 bg-red-300'>
+            <div className="border-2 p-2 rounded-md flex justify-center items-center bg-white rounded-md">
+                <div className={`w-70 h-[400px] rounded-md mx-4 ${selectedColor}`}>
+                    <div className="w-60 bg-red-300">
                         <div className="mt-30">
-                            <h4 className="text-center font-bold text-lg ">{selectedTitle}</h4>
-
-                            <div>
-                            </div>
-                            <h4 className="text-center ">{selectedCode}</h4>
+                            <h4 className="text-center font-bold text-lg">{selectedTitle}</h4>
+                            <h4 className="text-center">{selectedCode}</h4>
+                            {coverPreview && <img src={coverPreview} alt="Cover Preview" className="w-full h-auto" />}
+                            {documentFileName && <p className="text-center">{documentFileName}</p>}
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
-
-
         </div>
-
-    )
-}
+    );
+};

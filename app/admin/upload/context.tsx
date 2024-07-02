@@ -3,18 +3,22 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 import { notify } from '@/app/components/toast';
+import Cookies from 'universal-cookie';
 
-const API_BASE_URL = 'http://your-api-url'; // Replace with your actual API base URL
 
-interface Document {
+export interface Document {
     id?: string;
     title: string;
     code: string;
-    category: string[];
+    category: string;
+    cover: string;
+    description: string;
+    document: File;
+
 }
 
 interface DocumentContextType {
-    documents: Document[];
+    documents: any[];
     loading: boolean;
     error: string | null;
     uploadDocument: (doc: Document) => Promise<void>;
@@ -61,33 +65,62 @@ export const DocumentProvider: React.FC<IProps> = ({ children }) => {
     const [documents, setDocuments] = useState<Document[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const cookies = new Cookies()
+    const token = cookies.get("token");
+    const API_BASE_URL = 'https://e-library-nyh6.onrender.com/api';
+
+
 
     const uploadDocument = async (doc: Document) => {
-        setLoading(true);
+        const formData = new FormData();
+        formData.append('title', doc.title);
+        formData.append('code', doc.code);
+        formData.append('category', JSON.stringify(doc.category));
+        if (doc.cover) formData.append('cover', doc.cover);
+        if (doc.description) formData.append('description', doc.description);
+        if (doc.document) formData.append('document', doc.document);
+
         try {
-            const response = await axios.post(`${API_BASE_URL}/document/upload`, doc);
-            setDocuments((prev) => [...prev, response.data]);
+            setLoading(true)
+            const response = await axios.post(`${API_BASE_URL}/document/upload`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'x-auth-token': token
+
+                },
+            });
+            setLoading(false)
+            notify.success(response.data.massage);
+            notify.success("Document uplaod successfully");
+            setDocuments((prevDocs) => [...prevDocs, response.data]);
         } catch (error) {
+            setLoading(false)
             handleAxiosError(error);
-        } finally {
-            setLoading(false);
+
+
         }
     };
 
-    const updateDocument = async (id: string, doc: Document) => {
-        setLoading(true);
+    const updateDocument = async (id: string, doc: Partial<Document>) => {
+        const formData = new FormData();
+        if (doc.title) formData.append('title', doc.title);
+        if (doc.code) formData.append('code', doc.code);
+        if (doc.category) formData.append('category', JSON.stringify(doc.category));
+        if (doc.document) formData.append('document', doc.document);
+
         try {
-            await axios.put(`${API_BASE_URL}/document/${id}`, doc);
-            setDocuments((prev) =>
-                prev.map((d) => (d.id === id ? { ...d, ...doc } : d))
+            const response = await axios.put(`/document/${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            setDocuments((prevDocs) =>
+                prevDocs.map((d) => (d.id === id ? response.data : d))
             );
         } catch (error) {
-            handleAxiosError(error);
-        } finally {
-            setLoading(false);
+            console.error('Error updating document:', error);
         }
     };
-
     const getDocument = async (id: string): Promise<Document | null> => {
         setLoading(true);
         try {

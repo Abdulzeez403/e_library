@@ -3,14 +3,15 @@ import { FormField } from '@/app/component/input/textInput'
 import CustomButton from '@/app/components/button'
 import { Form, Formik } from 'formik'
 import React from 'react'
+import { useCategoryContext } from './categorycontext'
 
 export const CategoryForm = () => {
-
+    const { createCategory, loading } = useCategoryContext()
     const initialValues = {
-
-        category: ''
+        name: ''
     }
     const handleSubmit = (value: any) => {
+        createCategory(value)
         console.log(value)
     }
     return (
@@ -25,11 +26,11 @@ export const CategoryForm = () => {
                 <Form className="">
 
 
-                    <FormField label="Category" name="title" className="my-4" />
+                    <FormField label="Category" name="name" className="my-4" />
 
 
                     <div>
-                        <CustomButton type="submit">
+                        <CustomButton type="submit" loading={loading}>
                             Add Category
                         </CustomButton>
 

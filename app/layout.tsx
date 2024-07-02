@@ -6,6 +6,8 @@ import { AuthProvider } from "./(auth)/context";
 import Notification from "./components/toast";
 import { UsersContext } from "./context";
 import { DocumentProvider } from "./admin/upload/context";
+import { AdminAuthProvider } from "./(adminauth)/adminLogin/context";
+import { CategoryProvider } from "./admin/upload/categorycontext";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -22,12 +24,18 @@ export default function RootLayout({
     return (
         <html lang="en">
             <AuthProvider>
-                <UsersContext>
-                    <DocumentProvider>
-                        <Notification />
-                        <body>{children}</body>
-                    </DocumentProvider>
-                </UsersContext>
+                <AdminAuthProvider>
+                    <UsersContext>
+                        <DocumentProvider>
+                            <CategoryProvider>
+                                <Notification />
+                                <body>{children}</body>
+                            </CategoryProvider>
+
+                        </DocumentProvider>
+                    </UsersContext>
+                </AdminAuthProvider>
+
             </AuthProvider>
 
         </html>

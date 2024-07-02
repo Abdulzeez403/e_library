@@ -55,7 +55,7 @@ export const SidebarComponent = ({ children }: IProps) => {
         return (
             <Link href={link} legacyBehavior >
                 <MenuItem icon={icon}
-                    className={`py-[-1rem] hover:text-customPrimary ${isActive ? ' bg-white text-customPrimary' : 'text-white'}`} >
+                    className={`py-[-1rem] hover:text-customPrimary ${isActive ? ' bg-white text-black' : 'text-black'}`} >
                     <span className='text-semibold '>{title}</span>
                     {suffix && <span style={{ marginLeft: 'auto', color: "red", backgroundColor: "red" }}>{suffix}</span>}
                 </MenuItem>
@@ -90,7 +90,7 @@ export const SidebarComponent = ({ children }: IProps) => {
                 <div className='hidden md:flex lg:flex'>
                     <Sidebar
                         collapsed={collapsed}
-                        backgroundColor="orange"
+                        backgroundColor="white"
                         transitionDuration={1000}
                         rootStyles={{
                             background:
@@ -198,7 +198,7 @@ export const SidebarComponent = ({ children }: IProps) => {
 
                     </div>
 
-                    <div className="p-5">
+                    <div className="bg-slate-200 h-full">
                         {children}
                     </div>
                 </div>
