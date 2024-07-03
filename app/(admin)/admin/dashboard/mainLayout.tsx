@@ -12,6 +12,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { LibraryBig } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LuHome } from "react-icons/lu";
+import { useAuthContext } from '@/app/(auth)/context';
 
 
 interface IProps {
@@ -32,18 +33,7 @@ interface SubMenuIProps {
 
 export const SidebarComponent = ({ children }: IProps) => {
 
-    // const { currentUser, user, signOut } = useAuthContext();
-    // const cookies = new Cookies();
-    // let userCookie = cookies.get("user");
-
-    // useEffect(() => {
-    //     if (userCookie && userCookie._id) {
-    //         currentUser(userCookie._id);
-
-    //     } else {
-    //         console.error("User cookie not found or malformed");
-    //     }
-    // }, []);
+    const { signOut } = useAuthContext()
 
     const [collapsed, setCollapsed] = useState(false);
     const urlPath = usePathname();
@@ -184,15 +174,8 @@ export const SidebarComponent = ({ children }: IProps) => {
 
 
                         <div className="gap-x-4">
-                            {/* 
-                            <Button className='bg-white text-customPrimary hover:bg-slate-300 border-2 border-customPrimary mx-2'>
-                                <Link href="/quiz">
-                                    Start Quiz
-                                </Link>
 
-                            </Button> */}
-
-                            <Button className="hover:bg-slate-300  bg-customPrimary text-customSecondary">LogOut</Button>
+                            <Button className="hover:bg-slate-300  bg-[#F4683C]text-white" onClick={signOut}>LogOut</Button>
                         </div>
 
 

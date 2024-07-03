@@ -88,7 +88,7 @@ export const UploadDetail = ({ handleOpenModal }: IProps) => {
                             }}
                         />
                         <FormField
-                            label="Code"
+                            label="Course Code"
                             name="code"
                             onChange={(e) => {
                                 handleChange(e);

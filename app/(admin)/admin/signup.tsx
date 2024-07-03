@@ -45,8 +45,7 @@ export const SignUpForm: React.FC = () => {
             {({ isSubmitting }) => (
                 <Form className='w-80'>
 
-                    <h4 className='text-center font-bold'>SignUn</h4>
-                    <p className="text-center">Lorem ipsum dolor  </p>
+                    <h4 className='text-center font-bold'>SignUp</h4>
 
 
                     <FormField label="Name" name="name" className="my-4" />

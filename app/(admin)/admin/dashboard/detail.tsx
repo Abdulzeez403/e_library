@@ -39,7 +39,7 @@ export const Detail = () => {
 
 
                 } />
-            <Card total={dashboardData?.libraryStats?.totalDownload} title="Total Document" className="bg-[#45BB4E]" icon={
+            <Card total={dashboardData?.libraryStats?.totalDocument} title="Total Document" className="bg-[#45BB4E]" icon={
                 <File className="h-6 w-6" />
 
 
