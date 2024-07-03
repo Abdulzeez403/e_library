@@ -5,10 +5,10 @@ import HomeLayout from "../app/homeLayout"
 import { AuthProvider } from "./(auth)/context";
 import Notification from "./components/toast";
 import { UsersContext } from "./context";
-import { DocumentProvider } from "./admin/upload/context";
-import { AdminAuthProvider } from "./(adminauth)/adminLogin/context";
-import { CategoryProvider } from "./admin/upload/categorycontext";
-import { AdminProvider } from "./admin/profile/context";
+import { AdminAuthProvider } from "./(admin)/admin/context";
+import { AdminProvider } from "./(admin)/admin/dashboard/profile/context";
+import { CategoryProvider } from "./(admin)/admin/dashboard/upload/categorycontext";
+import { DocumentProvider } from "./(admin)/admin/dashboard/upload/context";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -24,25 +24,26 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <AuthProvider>
-                <AdminAuthProvider>
+            <head>
+                <meta charSet="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            </head>
+            <body>
+                <AuthProvider>
                     <AdminProvider>
-
-                        <UsersContext>
-                            <DocumentProvider>
-                                <CategoryProvider>
-                                    <Notification />
-                                    <body>{children}</body>
-                                </CategoryProvider>
-
-                            </DocumentProvider>
-                        </UsersContext>
+                        <AdminAuthProvider>
+                            <UsersContext>
+                                <DocumentProvider>
+                                    <CategoryProvider>
+                                        <Notification />
+                                        {children}
+                                    </CategoryProvider>
+                                </DocumentProvider>
+                            </UsersContext>
+                        </AdminAuthProvider>
                     </AdminProvider>
-
-                </AdminAuthProvider>
-
-            </AuthProvider>
-
+                </AuthProvider>
+            </body>
         </html>
     );
 }

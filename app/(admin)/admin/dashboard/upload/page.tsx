@@ -6,12 +6,11 @@ import { CategoryForm } from './categoryform'
 import { ResponsiveDrawerDialog } from '@/app/components/modal/responsivedrawer';
 import { Button } from '@/components/ui/button';
 import { useCategoryContext } from './categorycontext';
-import { FilePenLine, Trash2 } from 'lucide-react';
 
 
 export default function Page() {
     const [open, setOpen] = useState(false);
-    const { getAllCategories, categories, updateCategoryById, deleteCategoryById } = useCategoryContext()
+
 
     const handleCloseModal = () => {
         setOpen(false)
@@ -21,23 +20,19 @@ export default function Page() {
         setOpen(true)
     }
 
-    useEffect(() => {
-        getAllCategories()
-    }, [])
+
 
 
     return (
         <div className="p-6">
             <div>
-                <h4 className='font-bold'>UpLoadDocument</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et maiores distinctio </p>
+                <h4 className='font-bold'>Upload Document</h4>
+
 
             </div>
-            <div className="flex justify-end">
-                <Button onClick={handleOpenModal}> Add Categroy </Button>
-            </div>
 
-            <UploadDetail />
+
+            <UploadDetail handleOpenModal={handleOpenModal} />
 
             <ResponsiveDrawerDialog
                 title="Create Category"
@@ -48,7 +43,7 @@ export default function Page() {
                 <div>
                     <CategoryForm />
 
-                    {
+                    {/* {
                         categories.map((c, index) => (
                             <div className='flex justify-between py-2' key={index}>
                                 <h4>{c.name}</h4>
@@ -62,7 +57,7 @@ export default function Page() {
 
                             </div>
                         ))
-                    }
+                    } */}
 
                 </div>
 

@@ -55,7 +55,7 @@ export const SidebarComponent = ({ children }: IProps) => {
         return (
             <Link href={link} legacyBehavior >
                 <MenuItem icon={icon}
-                    className={`py-[-1rem] hover:text-customPrimary ${isActive ? ' bg-orange-200 text-white' : 'text-black'}`} >
+                    className={`py-[-1rem] hover:text-[#F4683C] ${isActive ? ' bg-[#F4683C] text-white' : 'text-black'}`} >
                     <span className='text-semibold '>{title}</span>
                     {suffix && <span style={{ marginLeft: 'auto', color: "red", backgroundColor: "red" }}>{suffix}</span>}
                 </MenuItem>
@@ -90,7 +90,7 @@ export const SidebarComponent = ({ children }: IProps) => {
                 <div className='hidden md:flex lg:flex'>
                     <Sidebar
                         collapsed={collapsed}
-                        backgroundColor="white"
+                        backgroundColor="#F3F3F7"
                         transitionDuration={1000}
                         rootStyles={{
                             background:
@@ -117,8 +117,8 @@ export const SidebarComponent = ({ children }: IProps) => {
 
 
                         <div>
-                            <h4 className="text-orange-200 font-bold text-[1.5rem] py-4 text-center">
-                                E-Library
+                            <h4 className="text-[#F4683C] font-bold text-[1.5rem] py-4 text-center">
+                                EDT-Library
 
                             </h4>
                         </div>
@@ -126,27 +126,27 @@ export const SidebarComponent = ({ children }: IProps) => {
 
                         <Menu>
                             <CustomMenuItem
-                                link={"/admin"}
+                                link={"/admin/dashboard"}
                                 title="Dashboard"
                                 suffix
                                 icon={<LuLayoutDashboard color="primary" />}
                             />
                             <CustomMenuItem
-                                link={"/admin/upload"}
+                                link={"/admin/dashboard/upload"}
                                 title="Upload"
                                 suffix
                                 icon={<PiExam color="primary" />}
                             />
 
                             <CustomMenuItem
-                                link={"/admin/shelf"}
+                                link={"/admin/dashboard/shelf"}
                                 title="Shelf"
                                 suffix
                                 icon={<LibraryBig className="w-6 h-6" />}
                             />
 
                             <CustomMenuItem
-                                link={"/admin/profile"}
+                                link={"/admin/dashboard/profile"}
                                 title="Profile"
                                 suffix
                                 icon={<FaUserTie color="primary" />}

@@ -20,17 +20,7 @@ interface IProp {
     updateUser: (userId: any, values: any) => void;
     signOut: () => void;
 }
-// const AuthContext = createContext<IProp>({
-//     loading: false,
-//     user: null || {},
-//     signIn: (payload) => {
-//         return null
-//     },
-//     signUp: (values) => { },
-//     currentUser: (userId) => { },
-//     updateUser: (userId, values) => { },
-//     signOut: () => { },
-// });
+
 
 const AdminAuthContext = createContext<IProp | undefined>(undefined);
 
@@ -59,19 +49,49 @@ export const AdminAuthProvider: React.FC<IProps> = ({ children }) => {
     const port = "https://e-library-rosy-ten.vercel.app/api";
     // const port = "https://e-library-nyh6.onrender.com/api"
 
+    // const signIn = async (payload: any) => {
+    //     setLoading(true)
+    //     try {
+    //         const response = await axios.post(`${port}/auth/admin-login`, payload);
+
+    //         // UseSetCookie("user")
+    //         UseSetCookie("token", response.data.token)
+    //         setUser(response.data);
+    //         router.push('/admin/dashboard');
+    //         setLoading(false)
+    //         notify.success(response.data.msg);
+
+
+    //     } catch (error: any) {
+    //         setLoading(false);
+    //         if (error.response) {
+    //             console.error('Server Error:', error.response.data);
+    //             notify.error(error.response.data.message || 'Server error occurred');
+    //         } else if (error.request) {
+    //             console.error('Network Error:', error.request);
+    //             notify.error('Network error occurred. Please try again later.');
+    //         } else {
+    //             console.error('Error:', error.message);
+    //             notify.error('An error occurred. Please try again.');
+    //         }
+    //         throw error;
+    //     };
+    // };
+
     const signIn = async (payload: any) => {
-        setLoading(true)
+        setLoading(true);
         try {
             const response = await axios.post(`${port}/auth/admin-login`, payload);
 
-            // UseSetCookie("user")
-            UseSetCookie("token", response.data.token)
+            // Assuming UseSetCookie is a valid function to set cookies
+            UseSetCookie("token", response.data.token);
             setUser(response.data);
-            setLoading(false)
-            router.push('/admin');
 
+            // Ensure router is correctly imported and used
+            router.push('/admin/dashboard');
+
+            setLoading(false);
             notify.success(response.data.msg);
-
 
         } catch (error: any) {
             setLoading(false);
@@ -86,7 +106,7 @@ export const AdminAuthProvider: React.FC<IProps> = ({ children }) => {
                 notify.error('An error occurred. Please try again.');
             }
             throw error;
-        };
+        }
     };
 
 
@@ -99,7 +119,7 @@ export const AdminAuthProvider: React.FC<IProps> = ({ children }) => {
             setUser(response.data);
             notify.success(response.data.msg);
             setLoading(false)
-            router.push('/admin');
+            router.push('/admin/dashboard');
 
             setLoading(false);
         } catch (error: any) {

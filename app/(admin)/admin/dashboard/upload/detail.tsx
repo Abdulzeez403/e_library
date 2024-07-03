@@ -7,19 +7,26 @@ import { Field, Form, Formik, FormikHelpers } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useDocumentContext } from './context';
 import { useCategoryContext } from './categorycontext';
+import { FilePenLine, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
 
 interface FormValues {
     title: string;
     code: string;
     category: string;
-    cover: string;
+    // cover: string;
     description: string;
     document: File | null;
 }
 
-export const UploadDetail = () => {
+interface IProps {
+    handleOpenModal: () => void;
+}
+
+export const UploadDetail = ({ handleOpenModal }: IProps) => {
     const { uploadDocument, loading } = useDocumentContext()
-    const { getAllCategories, categories } = useCategoryContext()
+    const { getAllCategories, categories, updateCategoryById, deleteCategoryById } = useCategoryContext()
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedTitle, setSelectedTitle] = useState('');
     const [selectedCode, setSelectedCode] = useState('');
@@ -33,7 +40,7 @@ export const UploadDetail = () => {
         title: '',
         code: '',
         category: '',
-        cover: '',
+        // cover: '',
         description: '',
         document: null,
     };
@@ -41,6 +48,8 @@ export const UploadDetail = () => {
     useEffect(() => {
         getAllCategories()
     }, [])
+
+
 
 
 
@@ -62,7 +71,7 @@ export const UploadDetail = () => {
     };
 
     return (
-        <div className="flex gap-x-40">
+        <div className="flex  justify-between">
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -101,14 +110,14 @@ export const UploadDetail = () => {
                             </Select>
                         </div>
 
-                        <FormField
+                        {/* <FormField
                             label="Cover"
                             name="cover"
                             onChange={(e) => {
                                 handleChange(e);
                                 setSelectedColor(e.target.value);
                             }}
-                        />
+                        /> */}
 
                         <div className="my-4">
                             <label htmlFor="description" className='font-semibold'>Description</label>
@@ -151,7 +160,7 @@ export const UploadDetail = () => {
                     </Form>
                 )}
             </Formik>
-
+            {/* 
             <div className="border-2 p-2 rounded-md flex justify-center items-center bg-white">
                 <div className={`w-70 h-[400px] rounded-md mx-4 ${selectedColor}`}>
                     <div className="w-60 bg-red-300">
@@ -163,7 +172,32 @@ export const UploadDetail = () => {
                         </div>
                     </div>
                 </div>
+            </div> */}
+
+            <div className="block bg-white w-[40%]  border-2 rounded-md p-10 ">
+                <h4 className='font-bold text-center'>Lists of Category</h4>
+                {
+                    categories.map((c, index) => (
+                        <div className='flex justify-between py-2' key={index}>
+                            <h4>{c.name}</h4>
+
+                            <div className="flex gap-x-4">
+                                <FilePenLine color="skyblue" className="h-4 w-4 cursor-pointer" onClick={() => { updateCategoryById(c?.name, c._id) }} />
+                                <Trash2 color="red" className="h-4 w-4  cursor-pointer "
+                                    onClick={() => { deleteCategoryById(c?._id) }} />
+
+                            </div>
+
+                        </div>
+                    ))
+                }
+
+                <div>
+                    <Button className="bg-[#F4683C]" onClick={handleOpenModal}>Add Category</Button>
+                </div>
             </div>
+
+
         </div>
     );
 };
