@@ -53,7 +53,6 @@ export const SignInForm: React.FC = () => {
                     <FormField label="Email" name="email" className="my-4" />
                     <FormField label="Password" name="password" type="password" />
 
-
                     <div>
                         <CustomButton type="submit" loading={loading}>
                             SignIn

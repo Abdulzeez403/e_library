@@ -66,9 +66,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             setDashboardData(response.data);
         } catch (error) {
             console.error('Error fetching dashboard data:', error);
-            handleAxiosError(error);
-        } finally {
-            setLoading(false);
+
         }
     };
 
@@ -81,9 +79,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             setAdminProfile(response.data);
         } catch (error) {
             console.error('Error fetching admin profile:', error);
-            handleAxiosError(error);
-        } finally {
-            setLoading(false);
+
         }
     };
 

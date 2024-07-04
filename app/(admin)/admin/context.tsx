@@ -44,6 +44,25 @@ export const AdminAuthProvider: React.FC<IProps> = ({ children }) => {
     const router = useRouter();
 
 
+    const handleAxiosError = (error: any) => {
+        if (error.response) {
+            // Server responded with a status other than 200 range
+            console.error('Server Error:', error.response.data);
+            notify.error(error.response.data.message || error.response.data.msg || 'Server error occurred');
+        } else if (error.request) {
+            // Request was made but no response was received
+            console.error('Network Error:', error.request);
+            notify.error('Network error occurred. Please try again later.');
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error('Error:', error.message);
+            notify.error('An error occurred. Please try again.');
+        }
+        throw error; // Re-throw the error after handling it
+    };
+
+
+
 
 
     // const port = "https://e-library-rosy-ten.vercel.app/api";
@@ -83,29 +102,16 @@ export const AdminAuthProvider: React.FC<IProps> = ({ children }) => {
         try {
             const response = await axios.post(`${port}/auth/admin-login`, payload);
 
-            // Assuming UseSetCookie is a valid function to set cookies
-            UseSetCookie("token", response.data.token);
+            UseSetCookie("token", response.data.token)
             setUser(response.data);
-
-            // Ensure router is correctly imported and used
+            notify.success(response.data.msg);
+            setLoading(false)
             router.push('/admin/dashboard');
 
             setLoading(false);
-            notify.success(response.data.msg);
-
         } catch (error: any) {
             setLoading(false);
-            if (error.response) {
-                console.error('Server Error:', error.response.data);
-                notify.error(error.response.data.message || 'Server error occurred');
-            } else if (error.request) {
-                console.error('Network Error:', error.request);
-                notify.error('Network error occurred. Please try again later.');
-            } else {
-                console.error('Error:', error.message);
-                notify.error('An error occurred. Please try again.');
-            }
-            throw error;
+            handleAxiosError(error)
         }
     };
 
@@ -120,21 +126,9 @@ export const AdminAuthProvider: React.FC<IProps> = ({ children }) => {
             notify.success(response.data.msg);
             setLoading(false)
             router.push('/admin/dashboard');
-
-            setLoading(false);
         } catch (error: any) {
             setLoading(false);
-            if (error.response) {
-                console.error('Server Error:', error.response.data);
-                notify.error(error.response.data.message || 'Server error occurred');
-            } else if (error.request) {
-                console.error('Network Error:', error.request);
-                notify.error('Network error occurred. Please try again later.');
-            } else {
-                console.error('Error:', error.message);
-                notify.error('An error occurred. Please try again.');
-            }
-            throw error;
+            handleAxiosError(error)
         }
     };
 

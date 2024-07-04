@@ -3,30 +3,21 @@ import { BookOpenCheck, File, ListEnd, UsersRound, Download } from 'lucide-react
 import React, { useEffect } from 'react'
 import { Card } from '../../../components/cards'
 import { useAdminContext } from './profile/context'
-import Cookies from 'universal-cookie'
-import { useRouter } from 'next/navigation'
+
 
 export const Detail = () => {
     const { getDashboardData, dashboardData } = useAdminContext()
+
+
 
     useEffect(() => {
         getDashboardData();
 
     }, [])
 
-    const cookies = new Cookies()
-
-    const router = useRouter();
 
 
-    useEffect(() => {
 
-        const token = cookies.get("token")
-        if (!token) {
-            router.push("/admin")
-        }
-
-    }, [])
 
     return (
         <div className="grid grid-cols-3 gap-4 p-8 ">
