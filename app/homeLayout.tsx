@@ -31,20 +31,20 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open }: IProps) => {
 
 
     return (
-        <div className="bg-slate-200">
+        <div className="bg-buttonColor">
             <div className="flex justify-between px-10 py-4">
-                <h3 className=' font-bold text-[1.3rem] text-orange-400 '>EDT-Library</h3>
+                <h3 className=' font-bold text-[1.3rem] text-white '>EDT-Library</h3>
 
                 <div className="hidden md:flex lg:flex">
                     <Menubar className='border-none bg-0'>
                         <MenubarMenu>
-                            <MenubarTrigger className="text-orange-400">Home</MenubarTrigger>
-                            <MenubarTrigger className="text-white">
-                                <Link href="/booklisting">Books</Link></MenubarTrigger>
-                            <MenubarTrigger className="text-white">About</MenubarTrigger>
+                            <MenubarTrigger className="text-white hover:border-b-2 border-white">Home</MenubarTrigger>
+                            <MenubarTrigger className="text-white hover:border-b-2 border-white">
+                                <Link href="/booklisting">Materials</Link></MenubarTrigger>
+                            <MenubarTrigger className="text-white hover:border-b-2 border-white">About</MenubarTrigger>
 
                             {user?._id &&
-                                (<MenubarTrigger className="text-white">Profile</MenubarTrigger>)}
+                                (<MenubarTrigger className="text-white hover:border-b-2 border-white">Profile</MenubarTrigger>)}
 
 
                         </MenubarMenu>
@@ -123,7 +123,7 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open }: IProps) => {
                                                 <Button onClick={() => {
                                                     handleOpenModal();
                                                     setToggle(false)
-                                                }} className='bg-[#F4683C]  text-white border-none hidden md:flex lg:flex hover:text-[#F4683C]  hover:bg-white'>Register Now</Button>
+                                                }} className='bg-[#F4683C]  text-white flex hover:text-[#F4683C]  hover:bg-white  border-2 border-white'>Register Now</Button>
 
 
                                             </div>

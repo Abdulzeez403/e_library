@@ -8,7 +8,6 @@ import { ResponsiveDrawerDialog } from '../components/modal/responsivedrawer';
 import { useDocumentContext } from '../(admin)/admin/dashboard/upload/context';
 import { useCategoryContext } from '../(admin)/admin/dashboard/upload/categorycontext';
 import Button from '../components/button';
-import { SidebarComponent } from './sidebarcomponent';
 import { useUserContext } from '../context';
 
 export const BookListingDetail = () => {
@@ -16,7 +15,8 @@ export const BookListingDetail = () => {
     const { getDocument, document, getDocumentsByCategory, categoryDocument, } = useDocumentContext();
     const { categories } = useCategoryContext();
     const { downloadDocument } = useUserContext()
-    const [isHovered, setIsHovered] = useState(false);
+    const [hoveredBookId, setHoveredBookId] = useState<string | null>(null);
+
     const [open, setOpen] = useState(false);
 
     const handleCloseModal = () => {
@@ -36,20 +36,28 @@ export const BookListingDetail = () => {
         setSelectedCategory(category)
     }
 
+    const handleMouseEnter = (id: string) => {
+        setHoveredBookId(id);
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredBookId(null);
+    };
+
 
     return (
         <div className="w-[90%] mx-auto mt-10">
             <div className="flex gap-x-20">
-                <div className="w-[25%]">
+                {/* <div className="w-[25%]">
                     < SidebarComponent category={categories} handleCategory={handleCategory} selectedCategory={selectedCategory} />
-                </div>
+                </div> */}
                 <div>
                     <div className="flex justify-between items-center pb-4">
                         <div className="flex items-center gap-x-4">
-                            <div className="flex gap-x-6">
+                            {/* <div className="flex gap-x-6">
                                 <Grid2X2 className="h-6 w-6" />
                                 <AlignVerticalSpaceAround className="h-6 w-6" />
-                            </div>
+                            </div> */}
                             <InputSearchComponent
                                 type="text"
                                 placeholder="Searching.."
@@ -73,28 +81,19 @@ export const BookListingDetail = () => {
                     </div>
                     <div className="grid grid-cols-5">
                         {categoryDocument.map((book, index) => (
-                            <div
-                                className="w-60 flex-shrink-0 mx-2 relative"
-                                key={book?._id}
-                                onMouseEnter={() => setIsHovered(true)}
-                                onMouseLeave={() => setIsHovered(false)}
-                            >
-                                <motion.div
-                                    className="flex flex-wrap w-60 p-4 border border-gray-200 rounded-md shadow-md h-80 bg-gradient-to-r from-blue-500 to-green-500"
-                                    whileHover={{
-                                        scale: 1.05,
-                                    }}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ duration: 1 }}
-                                    style={{ perspective: 1000 }}
+                            <div className="w-60 flex-shrink-0 mx-2" key={book?._id}>
+                                <div
+                                    className="relative flex flex-wrap w-60 p-4 border border-gray-200 rounded-md shadow-md h-80"
+                                    style={{ backgroundColor: book?.cover || '#BFDBFE' }}
                                     onClick={() => handleOpenModal(book?._id)}
+                                    onMouseEnter={() => handleMouseEnter(book?._id)}
+                                    onMouseLeave={handleMouseLeave}
                                 >
                                     <div className="w-full text-center mt-24">
                                         <h5 className="font-bold text-lg text-white">{book.title}</h5>
                                         <h5 className="font-bold text-lg text-white pt-8">{book.code}</h5>
                                     </div>
-                                    {isHovered && (
+                                    {hoveredBookId === book?._id && (
                                         <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 transition-opacity duration-300">
                                             <button
                                                 className="text-black bg-white px-4 py-2 rounded-md"
@@ -104,15 +103,15 @@ export const BookListingDetail = () => {
                                             </button>
                                         </div>
                                     )}
-                                </motion.div>
+                                </div>
                                 <ResponsiveDrawerDialog
-                                    title="Download Your Favourite Book"
-                                    description="Let's the journey begins!"
+                                    title="Download Materials"
+                                    description="Let's the learning begin!"
                                     isOpen={open}
                                     onClose={handleCloseModal}
                                 >
                                     <div>
-                                        <div className="">
+                                        <div className=''>
                                             <div className="w-80 mx-auto text-center bg-blue-300 h-60 p-8">
                                                 <h5 className="font-bold text-lg text-white">{document.title}</h5>
                                                 <h5 className="font-bold text-lg text-white pt-8">{document.code}</h5>
@@ -127,9 +126,7 @@ export const BookListingDetail = () => {
                                                         download={`${document.title}.pdf`}
                                                         className="inline-block w-full"
                                                     >
-                                                        <Button className="bg-green-400 w-full hover:bg-[#F3F3F7] " onClick={() => downloadDocument(document?._id)}>
-                                                            Download
-                                                        </Button>
+                                                        <Button className='bg-green-400 w-full hover:bg-[#F3F3F7]'>Download</Button>
                                                     </a>
                                                 </div>
                                             </div>

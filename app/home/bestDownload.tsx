@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export const BestDownload = () => {
     return (
-        <div className='bg-slate-200 py-10'>
+        <div className='bg-buttonColor py-10'>
 
             <div className='w-full md:w-[60%] lg:w-[60%] mx-auto'>
                 <div className='flex justify-center'>
@@ -31,9 +31,9 @@ export const BestDownload = () => {
                         </div>
 
                         <div className='w-full px-10 md:w-[50%] lg:w-[50%] text-center'>
-                            <h4 className='font-bold text-[1.5rem]'>Best Download of the Week!</h4>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A beatae laborum nostrum placeat, animi culpa impedit assumenda explicabo fugiat excepturi.</p>
-                            <Button className='bg-orange-500 my-4'>Download</Button>
+                            <h4 className='font-bold text-[1.5rem] text-white'>Top Pick of the Week!</h4>
+                            <p className="text-white py-2">Experience the finest content this week, carefully curated for you. Dive into our top selection and explore the best resources and insights we have to offer.</p>
+                            <Button className='bg-white text-buttonColor my-4'>Download</Button>
 
                         </div>
 

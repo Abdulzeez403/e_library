@@ -3,30 +3,33 @@ import React from 'react'
 import Image from "next/image"
 import HeroImage from "../../public/3dbook.png"
 import { motion } from 'framer-motion';
+import Link from "next/link"
 
 export const HeroSection = () => {
     return (
-        <div className=' bg-slate-200 h-full py-20'>
+        <div className=' bg-buttonColor h-full py-20'>
 
             <div className=' mx-auto w-[80%] '>
 
                 <section className="relative  py-20">
                     <div className="container mx-auto flex flex-col-reverse md:flex-row items-center">
                         <div className="w-96 md:flex-1 md:w-0 lg:w-0 lg:flex-1 mt-10 md:mt-0">
-                            <h1 className="text-4xl text-center md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 md:text-left lg:text-left">
-                                Welcome to the Ultimate E-Library
+                            <h1 className="text-4xl text-center md:text-5xl lg:text-6xl font-bold text-white mb-6 md:text-left lg:text-left">
+                                Welcome to EDT-Library
                             </h1>
-                            <p className="text-lg text-center md:text-xl md:text-left lg:text-left lg:text-2xl text-gray-700 mb-6">
-                                Discover a world of knowledge and inspiration. Explore our vast collection of books across various categories and fuel your journey of learning and creativity.
+                            <p className="text-lg text-center md:text-xl md:text-left lg:text-left lg:text-2xl text-white mb-6">
+                                Explore our vast collection of materials across various categories and fuel your journey of learning and creativity.
                             </p>
                             <div className='flex justify-center md:justify-start lg:justify-start'>
 
                                 <motion.button
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
-                                    className="px-4 py-3 bg-buttonColor text-white rounded-md text-lg font-medium"
+                                    className="px-4 py-3 bg-white text-buttonColor rounded-md text-lg font-medium"
                                 >
-                                    Start Exploring
+                                    <Link href="/booklisting">
+                                        Start Exploring
+                                    </Link>
                                 </motion.button>
                             </div>
 

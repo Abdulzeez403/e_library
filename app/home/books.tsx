@@ -18,11 +18,6 @@ export const AllBooks = () => {
     const { getAllCategories, categories } = useCategoryContext()
 
     useEffect(() => {
-        // if (activeMenu === "All") {
-        //     getLatestDocuments()
-        // } else {
-        //     getDocumentsByCategory(activeMenu)
-        // }
         getAllCategories();
         getDocumentsByCategory(activeMenu)
 

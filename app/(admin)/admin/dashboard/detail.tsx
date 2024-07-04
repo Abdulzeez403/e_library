@@ -25,7 +25,8 @@ export const Detail = () => {
             <Card
                 className="bg-[#926CFF]"
                 total={dashboardData?.libraryStats?.totalUser} title="Total User" icon={
-                    <Download className="h-6 w-6" />
+                    <UsersRound className="h-6 w-6" />
+
 
 
                 } />
@@ -41,12 +42,13 @@ export const Detail = () => {
 
                 } />
 
-            <Card
+            {/* <Card
                 className="bg-[#4D4D4D]"
                 title='Total Reading' total={dashboardData?.libraryStats?.totalReading} icon={
-                    <UsersRound className="h-6 w-6" />
+                    <Download className="h-6 w-6" />
 
-                } />
+
+                } /> */}
 
             <Card
                 className="bg-[#EC6C9A]"

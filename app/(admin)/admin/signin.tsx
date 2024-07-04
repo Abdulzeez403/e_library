@@ -51,10 +51,6 @@ export const SignInForm: React.FC = () => {
                 <Form className='w-80'>
 
                     <h4 className='text-center font-bold'>LogIn</h4>
-                    <p className="text-center">Lorem ipsum dolor  </p>
-
-
-
                     <FormField label="Email" name="email" className="my-4" />
                     <FormField label="Password" name="password" type="password" />
 
