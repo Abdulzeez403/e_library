@@ -29,10 +29,7 @@ interface MenuItemIProps {
     link: string
 }
 
-interface SubMenuIProps {
-    title: any
-    prefix: any
-}
+
 
 export const SidebarComponent = ({ children }: IProps) => {
 
@@ -61,20 +58,6 @@ export const SidebarComponent = ({ children }: IProps) => {
         )
     }
 
-    const CustomSubMenuItem = ({ title, prefix }: SubMenuIProps) => {
-        return (
-            <div style={{ display: 'flex', height: "100" }}>
-                <Menu>
-                    <SubMenu prefix={prefix} label={title} component="div">
-                        <MenuItem> Pie charts</MenuItem>
-                        <MenuItem> Line charts</MenuItem>
-                        <MenuItem> Bar charts</MenuItem>
-                    </SubMenu>
-                </Menu>
-            </div>
-        )
-
-    }
 
 
 
@@ -93,22 +76,7 @@ export const SidebarComponent = ({ children }: IProps) => {
                         }}
                     >
 
-                        {/* <div className="flex justify-center m-0 bg-customSecondary">
-                            <div className='flex justify-between align-center p-2 pb-3 bg-customSecondary'>
-                                <div className="block justify-center py-5 ">
-                                    <div className="relative flex justify-center items-center">
-                                        <Image src={User} alt="Logo" width={70} height={70} className="rounded-full py-4" />
-                                        <span className={`absolute top-[4.2rem] right-2  text-white rounded-full px-2 py-1 text-xs font-bold 
-                                    ${user?.profile?.membership === "free" ? "bg-red-500" : "bg-green-500"}`}>{user?.profile?.membership}</span>
-                                    </div>
-
-
-                                    <h4 className='text-white text-sm py-2'>{user?.name}</h4>
-                                </div>
-                            </div>
-
-
-                        </div> */}
+                   
 
 
                         <div>
@@ -175,7 +143,7 @@ export const SidebarComponent = ({ children }: IProps) => {
                         <div className="gap-x-4">
 
 
-                            <Button className="hover:bg-slate-300  bg-customPrimary text-buttonColor " onClick={() => signOut()}>LogOut</Button>
+                            <Button className="bg-buttonColor text-white" onClick={signOut}>LogOut</Button>
                         </div>
 
 

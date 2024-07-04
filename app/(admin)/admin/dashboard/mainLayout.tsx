@@ -1,13 +1,11 @@
 "use client"
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import React, { useEffect, useState } from 'react';
-import Image from "next/image"
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaUserTie } from "react-icons/fa6";
 import { PiExam } from "react-icons/pi";
-import User from "../../../public/user.png"
 import { GiHamburgerMenu } from "react-icons/gi";
 import { LibraryBig } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -175,7 +173,7 @@ export const SidebarComponent = ({ children }: IProps) => {
 
                         <div className="gap-x-4">
 
-                            <Button className="hover:bg-slate-300  bg-[#F4683C]text-white" onClick={signOut}>LogOut</Button>
+                            <Button className="bg-buttonColor text-white" onClick={signOut}>LogOut</Button>
                         </div>
 
 
