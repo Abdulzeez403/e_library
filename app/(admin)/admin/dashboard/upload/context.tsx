@@ -19,6 +19,8 @@ export interface Document {
 
 interface DocumentContextType {
     documents: any[];
+    document: any;
+    categoryDocument: any[];
     loading: boolean;
     error: string | null;
     uploadDocument: (doc: Document) => Promise<void>;
@@ -63,6 +65,8 @@ interface IProps {
 
 export const DocumentProvider: React.FC<IProps> = ({ children }) => {
     const [documents, setDocuments] = useState<Document[]>([]);
+    const [document, setDocument] = useState<Document>({} as any);
+    const [categoryDocument, setCategoryDocument] = useState<Document[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const cookies = new Cookies()
@@ -125,6 +129,7 @@ export const DocumentProvider: React.FC<IProps> = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.get(`${API_BASE_URL}/document/${id}`);
+            setDocument(response.data)
             return response.data;
         } catch (error) {
             handleAxiosError(error);
@@ -150,6 +155,7 @@ export const DocumentProvider: React.FC<IProps> = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.get(`${API_BASE_URL}/document/category/${category}`);
+            setCategoryDocument(response.data)
             return response.data;
         } catch (error) {
             handleAxiosError(error);
@@ -216,6 +222,8 @@ export const DocumentProvider: React.FC<IProps> = ({ children }) => {
         <DocumentContext.Provider
             value={{
                 documents,
+                document,
+                categoryDocument,
                 loading,
                 error,
                 uploadDocument,

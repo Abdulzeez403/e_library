@@ -1,9 +1,12 @@
 "use client"
 import HomePage from "../app/home/detail"
+import { useDocumentContext } from "./(admin)/admin/dashboard/upload/context";
 import HomeLayout from "./homeLayout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+    const { getLatestDocuments, documents, } = useDocumentContext();
+
 
     const [open, setOpen] = useState(false);
 
@@ -14,6 +17,10 @@ export default function Home() {
     const handleOpenModal = () => {
         setOpen(true)
     }
+
+    useEffect(() => {
+        getLatestDocuments();
+    }, [])
     return (
 
         <main className="">
@@ -21,7 +28,7 @@ export default function Home() {
                 handleCloseModal={handleCloseModal}
                 handleOpenModal={handleOpenModal}
                 open={open} />
-            <HomePage />
+            <HomePage documents={documents} />
         </main>
     );
 }

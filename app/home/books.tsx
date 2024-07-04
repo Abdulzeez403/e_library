@@ -1,14 +1,37 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DemoData } from '@/constant/data'
 import Image from "next/image"
 import { Menubar, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar'
+import { motion } from 'framer-motion'
+import { useDocumentContext } from '../(admin)/admin/dashboard/upload/context'
+import { useCategoryContext } from '../(admin)/admin/dashboard/upload/categorycontext'
 
-export const AllBooks: React.FC = () => {
-    const [activeMenu, setActiveMenu] = useState('All');
 
-    const handleMenuClick = (menu: string) => {
-        setActiveMenu(menu);
+
+
+export const AllBooks = () => {
+    const [activeMenu, setActiveMenu] = useState('Educational Technology');
+
+    const { getDocumentsByCategory, categoryDocument } = useDocumentContext()
+
+    const { getAllCategories, categories } = useCategoryContext()
+
+    useEffect(() => {
+        // if (activeMenu === "All") {
+        //     getLatestDocuments()
+        // } else {
+        //     getDocumentsByCategory(activeMenu)
+        // }
+        getAllCategories();
+        getDocumentsByCategory(activeMenu)
+
+
+    }, [activeMenu])
+
+    const handleMenuClick = (menu: any) => {
+        setActiveMenu(menu.name);
+        console.log(activeMenu, "the active cateo")
     };
 
     return (
@@ -25,13 +48,13 @@ export const AllBooks: React.FC = () => {
                     <div className='my-4 justify-center flex'>
                         <Menubar className='border-none'>
                             <MenubarMenu>
-                                {['All', 'Education', 'Art', 'Science', 'Engineering'].map((menu, index) => (
+                                {categories.map((menu: any, index: number) => (
                                     <MenubarTrigger
-                                        key={index}
+                                        key={menu?._id}
                                         onClick={() => handleMenuClick(menu)}
-                                        className={`px-4 py-2 ${menu === activeMenu ? 'bg-orange-500 text-white' : 'text-gray-700'}`}
+                                        className={`px-4 py-2 text-sm ${menu?.name === activeMenu ? 'bg-orange-500 text-white' : 'text-gray-700'}`}
                                     >
-                                        {menu}
+                                        {menu?.name}
                                     </MenubarTrigger>
                                 ))}
                             </MenubarMenu>
@@ -41,14 +64,25 @@ export const AllBooks: React.FC = () => {
                     {/* Mobile View: Display 4 books */}
                     <div className='flex md:hidden lg:hidden justify-center'>
                         <div className='grid grid-cols-2 gap-6'>
-                            {DemoData.slice(0, 4).map((book, index) => (
+                            {categoryDocument.slice(0, 4).map((book, index) => (
                                 <div key={index} className="w-full max-w-xs mx-auto">
                                     <div className='w-full'>
-                                        <Image src={book.img} alt={book.name} width={200} height={200} className='rounded-md w-full' />
-                                    </div>
-                                    <div className='text-center mt-2'>
-                                        <h4 className='font-medium'>{book.name}</h4>
-                                        <h4 className='text-gray-500'>{book.author}</h4>
+                                        <motion.div
+                                            className="flex flex-wrap w-60 p-4 border border-gray-200 rounded-md shadow-md h-80 bg-gradient-to-r from-blue-500 to-green-500"
+                                            whileHover={{
+                                                scale: 1.05,
+                                            }}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 1 }}
+                                            style={{ perspective: 1000 }}
+                                        >
+                                            <div className="w-full text-center mt-24">
+                                                <h5 className="font-bold text-lg text-white">{book.title}</h5>
+
+                                                <h5 className="font-bold text-lg text-white pt-8">{book.code}</h5>
+                                            </div>
+                                        </motion.div>
                                     </div>
                                 </div>
                             ))}
@@ -58,15 +92,27 @@ export const AllBooks: React.FC = () => {
                     {/* Desktop View: Display 8 books */}
                     <div className='hidden md:flex lg:flex justify-center'>
                         <div className='grid grid-cols-4 gap-4'>
-                            {DemoData.slice(0, 8).map((book, index) => (
+                            {categoryDocument?.slice(0, 8).map((book: any, index: number) => (
                                 <div key={index} className="w-full max-w-xs mx-auto">
                                     <div className='w-full'>
-                                        <Image src={book.img} alt={book.name} width={200} height={200} className='rounded-md w-full' />
+                                        <motion.div
+                                            className="flex flex-wrap w-60 p-4 border border-gray-200 rounded-md shadow-md h-80 bg-gradient-to-r from-blue-500 to-green-500"
+                                            whileHover={{
+                                                scale: 1.05,
+                                            }}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 1 }}
+                                            style={{ perspective: 1000 }}
+                                        >
+                                            <div className="w-full text-center mt-24">
+                                                <h5 className="font-bold text-lg text-white">{book.title}</h5>
+
+                                                <h5 className="font-bold text-lg text-white pt-8">{book.code}</h5>
+                                            </div>
+                                        </motion.div>
                                     </div>
-                                    <div className='text-center mt-2'>
-                                        <h4 className='font-medium'>{book.name}</h4>
-                                        <h4 className='text-gray-500'>{book.author}</h4>
-                                    </div>
+
                                 </div>
                             ))}
                         </div>

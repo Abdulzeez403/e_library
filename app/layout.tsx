@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import HomeLayout from "../app/homeLayout"
 import { AuthProvider } from "./(auth)/context";
 import Notification from "./components/toast";
-import { UsersContext } from "./context";
-import { AdminAuthProvider } from "./(admin)/admin/context";
-import { AdminProvider } from "./(admin)/admin/dashboard/profile/context";
 import { CategoryProvider } from "./(admin)/admin/dashboard/upload/categorycontext";
 import { DocumentProvider } from "./(admin)/admin/dashboard/upload/context";
+import { UserProvider } from "./context";
+import { AdminAuthProvider } from "./(admin)/admin/context";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -29,20 +27,22 @@ export default function RootLayout({
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </head>
             <body>
-                <AuthProvider>
-                    <AdminProvider>
-                        <AdminAuthProvider>
-                            <UsersContext>
-                                <DocumentProvider>
-                                    <CategoryProvider>
-                                        <Notification />
-                                        {children}
-                                    </CategoryProvider>
-                                </DocumentProvider>
-                            </UsersContext>
-                        </AdminAuthProvider>
-                    </AdminProvider>
-                </AuthProvider>
+                <AdminAuthProvider>
+
+                    <AuthProvider>
+                        <UserProvider>
+
+                            <DocumentProvider>
+                                <CategoryProvider>
+                                    <Notification />
+                                    {children}
+                                </CategoryProvider>
+                            </DocumentProvider>
+                        </UserProvider>
+
+                    </AuthProvider>
+                </AdminAuthProvider>
+
             </body>
         </html>
     );

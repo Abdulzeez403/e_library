@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 export const HeroSection = () => {
     return (
-        <div className=' bg-slate-300 h-full py-20'>
+        <div className=' bg-slate-200 h-full py-20'>
 
             <div className=' mx-auto w-[80%] '>
 
@@ -24,7 +24,7 @@ export const HeroSection = () => {
                                 <motion.button
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
-                                    className="px-6 py-3 bg-orange-400 text-white rounded-md text-lg font-medium"
+                                    className="px-4 py-3 bg-buttonColor text-white rounded-md text-lg font-medium"
                                 >
                                     Start Exploring
                                 </motion.button>

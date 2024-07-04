@@ -1,34 +1,33 @@
 "use client"
-
 import { BookOpenCheck, File, ListEnd, UsersRound, Download } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { Card } from '../../../components/cards'
 import { useAdminContext } from './profile/context'
+import Cookies from 'universal-cookie'
+import { useRouter } from 'next/navigation'
 
 export const Detail = () => {
     const { getDashboardData, dashboardData } = useAdminContext()
 
     useEffect(() => {
         getDashboardData();
-        console.log(dashboardData)
 
     }, [])
 
-    // totalCategroy
-    // :
-    // 0
-    // totalDocument
-    // :
-    // 14
-    // totalDownload
-    // :
-    // 1
-    // totalReading
-    // :
-    // 2
-    // totalUser
-    // :
-    // 6
+    const cookies = new Cookies()
+
+    const router = useRouter();
+
+
+    useEffect(() => {
+
+        const token = cookies.get("token")
+        if (!token) {
+            router.push("/admin")
+        }
+
+    }, [])
+
     return (
         <div className="grid grid-cols-3 gap-4 p-8 ">
 
@@ -46,7 +45,7 @@ export const Detail = () => {
             } />
             <Card
                 className="bg-[#F27851]"
-                title='Total Category' total={dashboardData?.libraryStats?.totalCategroy} icon={
+                title='Total Category' total={dashboardData?.libraryStats?.totalCategory} icon={
                     <ListEnd className="h-6 w-6" />
 
                 } />

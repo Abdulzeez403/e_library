@@ -11,8 +11,8 @@ export default function AdminLayout({ children }: IProps) {
         <div>
             <SidebarComponent>
                 <div className=' '>
-                    {children}
 
+                    {children}
                 </div>
             </SidebarComponent>
         </div>

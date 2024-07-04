@@ -42,6 +42,24 @@ export const useAuthContext = () => {
     return context;
 };
 
+const handleAxiosError = (error: any) => {
+    if (error.response) {
+        // Server responded with a status other than 200 range
+        console.error('Server Error:', error.response.data);
+        notify.error(error.response.data.message || 'Server error occurred');
+    } else if (error.request) {
+        // Request was made but no response was received
+        console.error('Network Error:', error.request);
+        notify.error('Network error occurred. Please try again later.');
+    } else {
+        // Something else happened while setting up the request
+        console.error('Error:', error.message);
+        notify.error('An error occurred. Please try again.');
+    }
+    throw error;
+};
+
+
 interface IProps {
     children: React.ReactNode;
 }
@@ -62,7 +80,7 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
     const signIn = async (payload: any) => {
         setLoading(true)
         try {
-            const response = await axios.post(`${port}/user-login`, payload);
+            const response = await axios.post(`${port}/auth/user-login`, payload);
 
             // UseSetCookie("user")
             UseSetCookie("token", response.data.token)
@@ -75,17 +93,7 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
 
         } catch (error: any) {
             setLoading(false);
-            if (error.response) {
-                console.error('Server Error:', error.response.data);
-                notify.error(error.response.data.message || 'Server error occurred');
-            } else if (error.request) {
-                console.error('Network Error:', error.request);
-                notify.error('Network error occurred. Please try again later.');
-            } else {
-                console.error('Error:', error.message);
-                notify.error('An error occurred. Please try again.');
-            }
-            throw error;
+            handleAxiosError(error)
         };
     };
 
@@ -95,9 +103,11 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.post(`${port}/auth/user-signup`, userData);
+            UseSetCookie("token", response.data.token)
+            setUser(response.data);
+            setLoading(false)
+            router.push('/profile');
             notify.success(response.data.msg);
-
-            setLoading(false);
         } catch (error: any) {
             setLoading(false);
             if (error.response) {
@@ -158,10 +168,9 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
 
 
     const signOut = async () => {
-        cookies.remove('user');
-        cookies.remove('token');
+        await cookies.remove('token');
         router.push('/')
-        // window.location.reload();
+        window.location.reload();
 
     };
 

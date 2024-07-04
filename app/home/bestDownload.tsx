@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export const BestDownload = () => {
     return (
-        <div className='bg-slate-300 py-10'>
+        <div className='bg-slate-200 py-10'>
 
             <div className='w-full md:w-[60%] lg:w-[60%] mx-auto'>
                 <div className='flex justify-center'>

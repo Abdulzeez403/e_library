@@ -7,12 +7,16 @@ import { Footer } from './footer';
 import { Thebest } from './thebest';
 
 
+interface IProps {
+    documents: any
+}
 
-const HomePage = () => {
+
+const HomePage = ({ documents }: IProps) => {
     return (
         <div>
             <HeroSection />
-            <Newarrrival />
+            <Newarrrival documents={documents} />
             <BestDownload />
             <AllBooks />
             {/* <Thebest /> */}

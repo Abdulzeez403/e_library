@@ -30,6 +30,24 @@ export const useAdminContext = (): AdminContextProps => {
     return context;
 };
 
+const handleAxiosError = (error: any) => {
+    if (error.response) {
+        // Server responded with a status other than 200 range
+        console.error('Server Error:', error.response.data);
+        notify.error(error.response.data.message || 'Server error occurred');
+    } else if (error.request) {
+        // Request was made but no response was received
+        console.error('Network Error:', error.request);
+        notify.error('Network error occurred. Please try again later.');
+    } else {
+        // Something else happened while setting up the request
+        console.error('Error:', error.message);
+        notify.error('An error occurred. Please try again.');
+    }
+    throw error;
+};
+
+
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [dashboardData, setDashboardData] = useState<any>(null);
     const [adminProfile, setAdminProfile] = useState<any>(null);
@@ -105,7 +123,5 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         </AdminContext.Provider>
     );
 };
-function handleAxiosError(error: unknown) {
-    throw new Error('Function not implemented.');
-}
+
 

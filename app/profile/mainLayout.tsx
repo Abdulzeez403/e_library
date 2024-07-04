@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 // import { SheetTrigger, SheetContent, Sheet } from '@/components/ui/sheet';
 // import { useAuthContext } from '@/app/(auth)/context';
 import { LuHome } from "react-icons/lu";
+import { useAuthContext } from '../(auth)/context';
 // import Cookies from 'universal-cookie';
 
 
@@ -35,22 +36,13 @@ interface SubMenuIProps {
 
 export const SidebarComponent = ({ children }: IProps) => {
 
-    // const { currentUser, user, signOut } = useAuthContext();
-    // const cookies = new Cookies();
-    // let userCookie = cookies.get("user");
 
-    // useEffect(() => {
-    //     if (userCookie && userCookie._id) {
-    //         currentUser(userCookie._id);
-
-    //     } else {
-    //         console.error("User cookie not found or malformed");
-    //     }
-    // }, []);
 
     const [collapsed, setCollapsed] = useState(false);
     const urlPath = usePathname();
     const courseId = urlPath.split('/')[2];
+
+    const { signOut } = useAuthContext();
 
     const CustomMenuItem = ({ title, icon, onClick, suffix, link }:
         MenuItemIProps) => {
@@ -58,7 +50,7 @@ export const SidebarComponent = ({ children }: IProps) => {
         return (
             <Link href={link} legacyBehavior >
                 <MenuItem icon={icon}
-                    className={`py-[-1rem] hover:text-customPrimary ${isActive ? ' bg-white text-customPrimary' : 'text-white'}`} >
+                    className={`py-[-1rem] hover:text-[#F4683C] ${isActive ? ' bg-[#F4683C] text-white' : 'text-black'}`} >
                     <span className='text-semibold '>{title}</span>
                     {suffix && <span style={{ marginLeft: 'auto', color: "red", backgroundColor: "red" }}>{suffix}</span>}
                 </MenuItem>
@@ -93,7 +85,7 @@ export const SidebarComponent = ({ children }: IProps) => {
                 <div className='hidden md:flex lg:flex'>
                     <Sidebar
                         collapsed={collapsed}
-                        backgroundColor="orange"
+                        backgroundColor="#F3F3F7"
                         transitionDuration={1000}
                         rootStyles={{
                             background:
@@ -120,8 +112,8 @@ export const SidebarComponent = ({ children }: IProps) => {
 
 
                         <div>
-                            <h4 className="text-white font-bold text-[1.5rem] py-4 text-center">
-                                E-Library
+                            <h4 className="text-[#F4683C] font-bold text-[1.5rem] py-4 text-center">
+                                EDT-Library
 
                             </h4>
                         </div>
@@ -130,23 +122,24 @@ export const SidebarComponent = ({ children }: IProps) => {
                         <Menu>
                             <CustomMenuItem
                                 link={"/profile"}
-                                title="Profile"
+                                title="Dashboard"
                                 suffix
                                 icon={<LuLayoutDashboard color="primary" />}
                             />
                             <CustomMenuItem
                                 link={"/profile/myshelf"}
-                                title="MyShelf"
+                                title="Shelf"
                                 suffix
                                 icon={<PiExam color="primary" />}
                             />
-
-                            {/* <CustomMenuItem
-                                link={"/profile"}
+                            <CustomMenuItem
+                                link={"/profile/profile"}
                                 title="Profile"
                                 suffix
-                                icon={<FaUserTie color="primary" />}
-                            /> */}
+                                icon={<LuLayoutDashboard color="primary" />}
+                            />
+
+
 
                             <CustomMenuItem
                                 link={"/"}
@@ -180,21 +173,15 @@ export const SidebarComponent = ({ children }: IProps) => {
 
 
                         <div className="gap-x-4">
-                            {/* 
-                            <Button className='bg-white text-customPrimary hover:bg-slate-300 border-2 border-customPrimary mx-2'>
-                                <Link href="/quiz">
-                                    Start Quiz
-                                </Link>
 
-                            </Button> */}
 
-                            <Button className="hover:bg-slate-300  bg-customPrimary text-customSecondary">LogOut</Button>
+                            <Button className="hover:bg-slate-300  bg-customPrimary text-buttonColor " onClick={() => signOut()}>LogOut</Button>
                         </div>
 
 
                     </div>
 
-                    <div className="p-5">
+                    <div className="p-5 bg-slate-300 h-full">
                         {children}
                     </div>
                 </div>

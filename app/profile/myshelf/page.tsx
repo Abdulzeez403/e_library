@@ -1,7 +1,10 @@
 import React from 'react'
+import { MySelfDetail } from './detail'
 
 export default function page() {
     return (
-        <div>MyShef</div>
+        <div>
+            <MySelfDetail />
+        </div>
     )
 }
