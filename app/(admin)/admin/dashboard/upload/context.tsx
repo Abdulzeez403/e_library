@@ -182,10 +182,11 @@ export const DocumentProvider: React.FC<IProps> = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.get(`${API_BASE_URL}/document/search`, { params: { query } });
+            setCategoryDocument(response.data)
             return response.data;
         } catch (error) {
-            handleAxiosError(error);
-            return [];
+            console.log(error)
+            return []
         } finally {
             setLoading(false);
         }

@@ -2,20 +2,26 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Grid2X2, AlignVerticalSpaceAround, SearchCode } from 'lucide-react';
-import { InputSearchComponent } from '../component/input';
+import { InputSearchComponent } from '../../component/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ResponsiveDrawerDialog } from '../components/modal/responsivedrawer';
-import { useDocumentContext } from '../(admin)/admin/dashboard/upload/context';
-import { useCategoryContext } from '../(admin)/admin/dashboard/upload/categorycontext';
-import Button from '../components/button';
-import { useUserContext } from '../context';
+import { ResponsiveDrawerDialog } from '../../components/modal/responsivedrawer';
+import { useDocumentContext } from '../../(admin)/admin/dashboard/upload/context';
+import { useCategoryContext } from '../../(admin)/admin/dashboard/upload/categorycontext';
+import Button from '../../components/button';
+import { useUserContext } from '../../context';
 
 export const BookListingDetail = () => {
     const [selectedCategory, setSelectedCategory] = useState('Educational Technology');
     const { getDocument, document, getDocumentsByCategory, categoryDocument, } = useDocumentContext();
     const { categories } = useCategoryContext();
     const { downloadDocument } = useUserContext()
+    const { searchDocuments } = useDocumentContext()
     const [hoveredBookId, setHoveredBookId] = useState<string | null>(null);
+    const [search, setSearch] = useState<string>('');
+
+    const handleSearchChange = (val: string) => {
+        setSearch(val);
+    };
 
     const [open, setOpen] = useState(false);
 
@@ -44,9 +50,17 @@ export const BookListingDetail = () => {
         setHoveredBookId(null);
     };
 
+    useEffect(() => {
+        searchDocuments(search)
+        console.log(search)
+    }, [search])
+
 
     return (
         <div className="w-[90%] mx-auto mt-10">
+            <div>
+
+            </div>
             <div className="flex gap-x-20">
                 {/* <div className="w-[25%]">
                     < SidebarComponent category={categories} handleCategory={handleCategory} selectedCategory={selectedCategory} />
@@ -62,6 +76,7 @@ export const BookListingDetail = () => {
                                 type="text"
                                 placeholder="Searching.."
                                 icon={<SearchCode className="h-4 w-4" />}
+                                onChange={handleSearchChange}
                             />
                         </div>
                         <div className="w-60">
@@ -79,9 +94,9 @@ export const BookListingDetail = () => {
                             </Select>
                         </div>
                     </div>
-                    <div className="grid grid-cols-5">
+                    <div className="grid grid-cols-5 gap-x-6">
                         {categoryDocument.map((book, index) => (
-                            <div className="w-60 flex-shrink-0 mx-2" key={book?._id}>
+                            <div className="w-60 flex-shrink-0 mx-2 pb-4" key={book?._id}>
                                 <div
                                     className="relative flex flex-wrap w-60 p-4 border border-gray-200 rounded-md shadow-md h-80"
                                     style={{ backgroundColor: book?.cover || '#BFDBFE' }}
@@ -112,7 +127,7 @@ export const BookListingDetail = () => {
                                 >
                                     <div>
                                         <div className=''>
-                                            <div className="w-80 mx-auto text-center bg-blue-300 h-60 p-8">
+                                            <div style={{ backgroundColor: document?.cover || '#BFDBFE' }} className="w-80 mx-auto text-center h-60 p-8">
                                                 <h5 className="font-bold text-lg text-white">{document.title}</h5>
                                                 <h5 className="font-bold text-lg text-white pt-8">{document.code}</h5>
                                             </div>
@@ -120,18 +135,19 @@ export const BookListingDetail = () => {
                                                 <h4>{document.title}</h4>
                                                 <h4>{document.code}</h4>
                                                 <h4>{document.description}</h4>
-                                                <div>
+                                                <div onClick={() => downloadDocument(document?._id)}>
                                                     <a
                                                         href={document.document}
                                                         download={`${document.title}.pdf`}
                                                         className="inline-block w-full"
                                                     >
-                                                        <Button className='bg-green-400 w-full hover:bg-[#F3F3F7]'>Download</Button>
+                                                        <Button className='bg-green-400 w-full hover:bg-buttonColor'>Download</Button>
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </ResponsiveDrawerDialog>
                             </div>
                         ))}

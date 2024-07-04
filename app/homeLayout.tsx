@@ -14,20 +14,16 @@ import { useUserContext } from './context';
 
 
 interface IProps {
+    user: any;
     handleCloseModal: () => void;
     handleOpenModal: () => void;
-    open: boolean
+    open: boolean;
 }
 
-const HomeLayout = ({ handleOpenModal, handleCloseModal, open }: IProps) => {
+const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) => {
     const [toggle, setToggle] = useState(false);
 
-    const { getUserProfile, user } = useUserContext();
 
-    useEffect(() => {
-        getUserProfile();
-        console.log(user)
-    }, [])
 
 
     return (
@@ -38,13 +34,20 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open }: IProps) => {
                 <div className="hidden md:flex lg:flex">
                     <Menubar className='border-none bg-0'>
                         <MenubarMenu>
-                            <MenubarTrigger className="text-white hover:border-b-2 border-white">Home</MenubarTrigger>
+                            <MenubarTrigger className="text-white hover:border-b-2 border-white  focus:bg-none">
+                                <Link href="/">
+                                    Home
+                                </Link>
+                            </MenubarTrigger>
                             <MenubarTrigger className="text-white hover:border-b-2 border-white">
-                                <Link href="/booklisting">Materials</Link></MenubarTrigger>
+                                <Link href="/home/booklisting">Materials</Link></MenubarTrigger>
                             <MenubarTrigger className="text-white hover:border-b-2 border-white">About</MenubarTrigger>
 
                             {user?._id &&
-                                (<MenubarTrigger className="text-white hover:border-b-2 border-white">Profile</MenubarTrigger>)}
+                                (<MenubarTrigger className="text-white hover:border-b-2 border-white">
+                                    <Link href="/profile">
+                                        Profile
+                                    </Link></MenubarTrigger>)}
 
 
                         </MenubarMenu>

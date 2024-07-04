@@ -3,16 +3,22 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useDocumentContext } from '../(admin)/admin/dashboard/upload/context';
 import { ResponsiveDrawerDialog } from '../components/modal/responsivedrawer';
 import { Button } from '@/components/ui/button';
+import { useUserContext } from '../context';
 
 interface IProps {
     documents: any;
+    user: any
+    handleCloseModal: () => void;
+    handleOpenModal: () => void;
+    open: boolean;
 }
 
-export const NewArrival = ({ documents }: IProps) => {
+export const NewArrival = ({ documents, user, handleCloseModal: handleAuthCloseeModal, handleOpenModal: handleAuthOpeneModal, open: openAuth }: IProps) => {
     const [isScrollable, setIsScrollable] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const { getDocument, document } = useDocumentContext();
+    const { downloadDocument } = useUserContext()
     const [hoveredBookId, setHoveredBookId] = useState<string | null>(null);
 
     const [open, setOpen] = useState(false);
@@ -61,7 +67,7 @@ export const NewArrival = ({ documents }: IProps) => {
                             <div
                                 className="relative flex flex-wrap w-60 p-4 border border-gray-200 rounded-md shadow-md h-80"
                                 style={{ backgroundColor: book?.cover || '#BFDBFE' }}
-                                onClick={() => handleOpenModal(book?._id)}
+                                // onClick={() => handleOpenModal(book?._id)}
                                 onMouseEnter={() => handleMouseEnter(book?._id)}
                                 onMouseLeave={handleMouseLeave}
                             >
@@ -71,12 +77,19 @@ export const NewArrival = ({ documents }: IProps) => {
                                 </div>
                                 {hoveredBookId === book?._id && (
                                     <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 transition-opacity duration-300">
-                                        <button
+                                        {user?._id ? (<button
                                             className="text-black bg-white px-4 py-2 rounded-md"
                                             onClick={() => handleOpenModal(book?._id)}
                                         >
                                             View
-                                        </button>
+                                        </button>) : (<button
+                                            className="text-black bg-white px-4 py-2 rounded-md"
+                                            // disabled
+                                            onClick={() => handleAuthOpeneModal()}
+                                        >
+                                            Login
+                                        </button>)}
+
                                     </div>
                                 )}
                             </div>
@@ -88,7 +101,7 @@ export const NewArrival = ({ documents }: IProps) => {
                             >
                                 <div>
                                     <div className=''>
-                                        <div className="w-80 mx-auto text-center bg-blue-300 h-60 p-8">
+                                        <div style={{ backgroundColor: document?.cover || '#BFDBFE' }} className="w-80 mx-auto text-center h-60 p-8">
                                             <h5 className="font-bold text-lg text-white">{document.title}</h5>
                                             <h5 className="font-bold text-lg text-white pt-8">{document.code}</h5>
                                         </div>
@@ -96,13 +109,13 @@ export const NewArrival = ({ documents }: IProps) => {
                                             <h4>{document.title}</h4>
                                             <h4>{document.code}</h4>
                                             <h4>{document.description}</h4>
-                                            <div>
+                                            <div onClick={() => downloadDocument(document?._id)}>
                                                 <a
                                                     href={document.document}
                                                     download={`${document.title}.pdf`}
                                                     className="inline-block w-full"
                                                 >
-                                                    <Button className='bg-green-400 w-full hover:bg-[#F3F3F7]'>Download</Button>
+                                                    <Button className='bg-green-400 w-full hover:bg-buttonColor'>Download</Button>
                                                 </a>
                                             </div>
                                         </div>

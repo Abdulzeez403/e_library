@@ -76,7 +76,7 @@ export const SidebarComponent = ({ children }: IProps) => {
                         }}
                     >
 
-                   
+
 
 
                         <div>
@@ -96,7 +96,7 @@ export const SidebarComponent = ({ children }: IProps) => {
                             />
                             <CustomMenuItem
                                 link={"/profile/myshelf"}
-                                title="Shelf"
+                                title="MyShelf"
                                 suffix
                                 icon={<PiExam color="primary" />}
                             />

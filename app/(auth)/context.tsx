@@ -89,10 +89,7 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
             setUser(response.data);
             setLoading(false)
             router.push('/profile');
-
             notify.success(response.data.msg);
-
-
         } catch (error: any) {
             setLoading(false);
             handleAxiosError(error)
@@ -163,7 +160,7 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
     const signOut = async () => {
         await cookies.remove('token');
         router.push('/')
-        window.location.reload();
+        // window.location.reload();
 
     };
 

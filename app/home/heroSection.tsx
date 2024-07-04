@@ -27,7 +27,7 @@ export const HeroSection = () => {
                                     whileTap={{ scale: 0.9 }}
                                     className="px-4 py-3 bg-white text-buttonColor rounded-md text-lg font-medium"
                                 >
-                                    <Link href="/booklisting">
+                                    <Link href="/home/booklisting">
                                         Start Exploring
                                     </Link>
                                 </motion.button>
