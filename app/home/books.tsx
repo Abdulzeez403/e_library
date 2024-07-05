@@ -66,9 +66,10 @@ export const AllBooks = ({ user, handleCloseModal: handleAuthCloseeModal, handle
                     <div className='block md:hidden lg:hidden justify-center'>
                         <div className='grid grid-cols-2 gap-6'>
                             {documents.slice(0, 4).map((book: any, index) => (
-                                <div className="w-60 flex-shrink-0 mx-2" key={book?._id}>
+                                <div className="w-full flex-shrink-0 mx-2" key={book?._id}>
                                     <div
-                                        className="relative flex flex-wrap w-60 p-4 border border-gray-200 rounded-md shadow-md h-80"
+                                        className="relative flex flex-wrap 
+                                        w-54 p-4 border border-gray-200 rounded-md shadow-md h-80"
                                         style={{ backgroundColor: book?.cover || '#BFDBFE' }}
                                         // onClick={() => handleOpenModal(book?._id)}
                                         onMouseEnter={() => handleMouseEnter(book?._id)}
@@ -127,12 +128,11 @@ export const AllBooks = ({ user, handleCloseModal: handleAuthCloseeModal, handle
                             ))}
                         </div>
 
-                        <div className='flex justify-center '>
-
+                        <div className='flex justify-center  mt-4'>
                             <motion.button
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
-                                className="px-4 py-3 bg-white text-buttonColor rounded-md text-lg font-medium"
+                                className="px-4 py-3 text-white bg-buttonColor rounded-md text-lg font-medium"
                             >
                                 <Link href="/booklisting">
                                     Start Exploring

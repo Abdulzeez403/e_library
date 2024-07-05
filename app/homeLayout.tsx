@@ -53,42 +53,44 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
                         </MenubarMenu>
                     </Menubar>
                 </div>
-                {user?._id ? (<Button className='bg-[#F4683C] text-md  hidden md:flex lg:flex'>{user?.name}</Button>) : (<div className="hidden md:flex lg:flex">
-                    <div className="pl-4 flex space-x-4">
+                {user?._id ?
+                    (<Button className='bg-[#F4683C] text-md  hidden md:flex lg:flex'><Link href="/profile">{user?.name}</Link></Button>) :
+                    (<div className="hidden md:flex lg:flex">
+                        <div className="pl-4 flex space-x-4">
 
-                        <Button
-                            onClick={() => {
+                            <Button
+                                onClick={() => {
+                                    handleOpenModal();
+                                    setToggle(true)
+                                }} className=" bg-white text-[#F4683C]  hover:bg-orange-400 hover:text-white">
+                                Login
+                            </Button>
+
+
+                            <Button onClick={() => {
                                 handleOpenModal();
-                                setToggle(true)
-                            }} className=" bg-white text-[#F4683C]  hover:bg-orange-400 hover:text-white">
-                            Login
-                        </Button>
+                                setToggle(false)
+                            }} className='bg-[#F4683C]  text-white border-none hidden md:flex lg:flex hover:text-[#F4683C]  hover:bg-white'>Register Now</Button>
 
 
-                        <Button onClick={() => {
-                            handleOpenModal();
-                            setToggle(false)
-                        }} className='bg-[#F4683C]  text-white border-none hidden md:flex lg:flex hover:text-[#F4683C]  hover:bg-white'>Register Now</Button>
-
-
-                    </div>
-                </div>)}
+                        </div>
+                    </div>)}
 
                 <div className="flex md:hidden lg:hidden">
                     <Sheet>
                         <SheetTrigger>
-                            <HiOutlineMenuAlt2 color="orange" size={30} className='border-2 border-buttonColor rounded-md p-4' />
+                            <HiOutlineMenuAlt2 color="white" size={30} />
                         </SheetTrigger>
                         <SheetContent>
                             <SheetHeader>
-                                <SheetTitle>E-Resource</SheetTitle>
+                                <SheetTitle className="font-bold text-buttonColor">EDT-Library</SheetTitle>
                                 <div className="block items-center">
                                     <div>
                                         <Link href="/" className=' text-[20px]'>Home</Link>
                                     </div>
                                     <div>
 
-                                        <Link href="/booklisting" className='text-[20px]'>Books</Link>
+                                        <Link href="/home/booklisting" className='text-[20px]'>Materials</Link>
                                     </div>
 
                                     <div>
@@ -100,10 +102,7 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
                                         <div>
                                             <Link href="/profile" className='text-[20px]'>Profile</Link>
                                         </div>}
-                                    <div>
 
-                                        <Link href="/" className='text-[20px]'>FAQ</Link>
-                                    </div>
 
                                     {user?._id ?
                                         (<Button onClick={() => {
@@ -111,14 +110,14 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
                                             setToggle(false)
                                         }} className='bg-[#F4683C]  text-white border-none hidden md:flex lg:flex hover:text-[#F4683C]  hover:bg-white'>LogOut</Button>) :
 
-                                        (<div className="hidden md:flex lg:flex">
-                                            <div className="pl-4 flex space-x-4">
+                                        (<div className=" flex justify-center">
+                                            <div className="pl-4 space-x-4">
 
                                                 <Button
                                                     onClick={() => {
                                                         handleOpenModal();
                                                         setToggle(true)
-                                                    }} className=" bg-white text-[#F4683C]  hover:bg-orange-400 hover:text-white">
+                                                    }} className=" bg-white text-[#F4683C] hover:text-white border-2 border-buttonColor px-8 my-2">
                                                     Login
                                                 </Button>
 

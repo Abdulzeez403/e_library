@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Image from "next/image"
-import HeroImage from "../../public/3dbook.png"
+import HeroImage from "../../public/herosectoinImage.png"
 import { motion } from 'framer-motion';
 import Link from "next/link"
 

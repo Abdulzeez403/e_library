@@ -23,6 +23,10 @@ export default function Page() {
                 handleOpenModal={handleOpenModal}
                 open={open} />
             <BookListingDetail
+                user={user}
+                handleCloseModal={handleCloseModal}
+                handleOpenModal={handleOpenModal}
+                open={open}
             />
         </div>
     )

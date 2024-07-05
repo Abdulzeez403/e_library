@@ -53,17 +53,17 @@ export const NewArrival = ({ documents, user, handleCloseModal: handleAuthClosee
         <div className='my-10 relative'>
             <div className='flex justify-center'>
                 <div className="w-[30rem]">
-                    <h4 className='font-bold text-[2rem] text-center'>
+                    <h4 className='font-bold text-[1.5rem] text-center'>
                         New <span className="text-orange-400">Materials</span>
                     </h4>
-                    <p className='text-center'>Discover the Latest Additions: Fresh Content and Resources</p>
+                    <p className='text-center px-4 md:px-0 lg:px-0'>Discover the Latest Additions: Fresh Content and Resources.</p>
                 </div>
             </div>
 
-            <div className='w-[100%] mx-auto py-10 relative'>
+            <div className='w-full mx-auto py-10 relative'>
                 <div ref={containerRef} className='flex justify-center overflow-x-auto no-scrollbar'>
                     {documents.slice(0, 4).map((book: any) => (
-                        <div className="w-60 flex-shrink-0 mx-2" key={book?._id}>
+                        <div className="w-60 mx-2" key={book?._id}>
                             <div
                                 className="relative flex flex-wrap w-60 p-4 border border-gray-200 rounded-md shadow-md h-80"
                                 style={{ backgroundColor: book?.cover || '#BFDBFE' }}

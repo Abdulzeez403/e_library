@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Image from "next/image"
-import BestDownloadImage from "../../public/book11.jpeg"
+import BestDownloadImage from "../../public/bestDownlaodImage.png"
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion';
 
