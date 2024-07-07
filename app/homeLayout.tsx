@@ -23,13 +23,27 @@ interface IProps {
 const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) => {
     const [toggle, setToggle] = useState(false);
 
+    const [initials, setInitials] = useState('');
+
+    useEffect(() => {
+        if (user?.name) {
+            const nameArray = user.name.split(' ');
+            const firstInitial = nameArray[0]?.charAt(0) || '';
+            const lastInitial = nameArray[nameArray.length - 1]?.charAt(0) || '';
+            setInitials(`${firstInitial}${lastInitial}`);
+        }
+    }, [user]);
+
 
 
 
     return (
         <div className="bg-buttonColor">
             <div className="flex justify-between px-10 py-4">
-                <h3 className=' font-bold text-[1.3rem] text-white '>EDT-Library</h3>
+                <h3 className=' font-bold text-[1.3rem] text-white '>
+                    <Link href="/">
+                        EDT-Library
+                    </Link></h3>
 
                 <div className="hidden md:flex lg:flex">
                     <Menubar className='border-none bg-0'>
@@ -48,13 +62,12 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
                                     <Link href="/profile">
                                         Profile
                                     </Link></MenubarTrigger>)}
-
-
                         </MenubarMenu>
                     </Menubar>
                 </div>
+
                 {user?._id ?
-                    (<Button className='bg-[#F4683C] text-md  hidden md:flex lg:flex'><Link href="/profile">{user?.name}</Link></Button>) :
+                    (<Button className='bg-white text-buttonColor text-md  hidden md:flex lg:flex'><Link href="/profile">{user?.name}</Link></Button>) :
                     (<div className="hidden md:flex lg:flex">
                         <div className="pl-4 flex space-x-4">
 
@@ -77,6 +90,12 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
                     </div>)}
 
                 <div className="flex md:hidden lg:hidden">
+                    {user?._id && (<Link href="/profile">
+
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-buttonCOlor text-lg font-bold mr-2">
+                            {initials}
+                        </div>
+                    </Link>)}
                     <Sheet>
                         <SheetTrigger>
                             <HiOutlineMenuAlt2 color="white" size={30} />
@@ -105,10 +124,12 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
 
 
                                     {user?._id ?
-                                        (<Button onClick={() => {
-                                            handleOpenModal();
-                                            setToggle(false)
-                                        }} className='bg-[#F4683C]  text-white border-none hidden md:flex lg:flex hover:text-[#F4683C]  hover:bg-white'>LogOut</Button>) :
+                                        (
+                                            <div className=' flex justify-center mt-2' >
+                                                <Button onClick={() => {
+                                                    handleOpenModal();
+                                                    setToggle(false)
+                                                }} className='bg-[#F4683C]  text-white hover:text-[#F4683C]  hover:bg-white'>LogOut</Button> </div>) :
 
                                         (<div className=" flex justify-center">
                                             <div className="pl-4 space-x-4">

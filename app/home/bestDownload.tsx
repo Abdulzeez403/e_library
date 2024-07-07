@@ -26,7 +26,7 @@ export const BestDownload = () => {
                                     ease: 'linear'
                                 }}
                             >
-                                <Image src={BestDownloadImage} alt="image" width={200} height={200} />
+                                <Image src={BestDownloadImage} alt="image" width={300} height={300} />
                             </motion.div>
                         </div>
 

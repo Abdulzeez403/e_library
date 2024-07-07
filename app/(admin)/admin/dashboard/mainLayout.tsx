@@ -11,6 +11,10 @@ import { LibraryBig } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LuHome } from "react-icons/lu";
 import { useAuthContext } from '@/app/(auth)/context';
+import { SheetTrigger, SheetContent, Sheet, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
+
+
 
 
 interface IProps {
@@ -170,8 +174,56 @@ export const SidebarComponent = ({ children }: IProps) => {
                         </div>
 
 
+                        <div className="">
+                            <div className="flex md:hidden lg:hidden">
+                                <Sheet>
+                                    <SheetTrigger>
+                                        <HiOutlineMenuAlt2 color="orange" size={30} />
+                                    </SheetTrigger>
+                                    <SheetContent>
+                                        <SheetHeader>
+                                            <SheetTitle className="font-bold text-buttonColor">EDT-Library</SheetTitle>
+                                            <div className="block items-center">
 
-                        <div className="gap-x-4">
+                                                <Menu>
+                                                    <CustomMenuItem
+                                                        link={"/profile"}
+                                                        title="Dashboard"
+                                                        suffix
+                                                        icon={<LuLayoutDashboard color="primary" />}
+                                                    />
+                                                    <CustomMenuItem
+                                                        link={"/profile/myshelf"}
+                                                        title="MyShelf"
+                                                        suffix
+                                                        icon={<PiExam color="primary" />}
+                                                    />
+                                                    <CustomMenuItem
+                                                        link={"/profile/profile"}
+                                                        title="Profile"
+                                                        suffix
+                                                        icon={<LuLayoutDashboard color="primary" />}
+                                                    />
+
+
+
+                                                    <CustomMenuItem
+                                                        link={"/"}
+                                                        title="Home"
+                                                        suffix
+                                                        icon={<LuHome color="primary" />}
+                                                    />
+                                                </Menu>
+
+                                            </div>
+
+
+
+                                        </SheetHeader>
+                                    </SheetContent>
+                                </Sheet>
+                            </div>
+
 
                             <Button className="bg-buttonColor text-white" onClick={signOut}>LogOut</Button>
                         </div>

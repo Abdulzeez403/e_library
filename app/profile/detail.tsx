@@ -4,6 +4,7 @@ import { BookOpenCheck, File, ListEnd, UsersRound, Download } from 'lucide-react
 import React, { useEffect } from 'react'
 import { Card } from '../components/cards'
 import { useUserContext } from '../context'
+import { MySelfDetail } from './myshelf/detail'
 
 export const Detail = () => {
 
@@ -16,22 +17,12 @@ export const Detail = () => {
 
 
     return (
-        <div className="grid grid-cols-3 gap-4 p-8 ">
-
-            <Card
-                className="bg-[#926CFF]"
-                total={dashboardData?.totalReading} title="Total Reading" icon={
-                    <File className="h-6 w-6" />
-
-
-
-                } />
+        <div className=" p-0 md:p-8 lg:p-8 ">
             <Card total={dashboardData?.totalDownload} title="Total Download" className="bg-[#45BB4E]" icon={
                 <Download className="h-6 w-6" />
-
-
-
             } />
+
+            <MySelfDetail />
 
 
 

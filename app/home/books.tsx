@@ -64,19 +64,19 @@ export const AllBooks = ({ user, handleCloseModal: handleAuthCloseeModal, handle
 
                     {/* Mobile View: Display 4 books */}
                     <div className='block md:hidden lg:hidden justify-center'>
-                        <div className='grid grid-cols-2 gap-6'>
-                            {documents.slice(0, 4).map((book: any, index) => (
+                        <div className='grid grid-cols-2 gap-4'>
+                            {documents.slice(0, 8).map((book: any, index) => (
                                 <div className="w-full flex-shrink-0 mx-2" key={book?._id}>
                                     <div
                                         className="relative flex flex-wrap 
-                                        w-54 p-4 border border-gray-200 rounded-md shadow-md h-80"
+                                        w-54 p-4 border border-gray-200 rounded-md shadow-md h-60"
                                         style={{ backgroundColor: book?.cover || '#BFDBFE' }}
                                         // onClick={() => handleOpenModal(book?._id)}
                                         onMouseEnter={() => handleMouseEnter(book?._id)}
                                         onMouseLeave={handleMouseLeave}
                                     >
-                                        <div className="w-full text-center mt-24">
-                                            <h5 className="font-bold text-lg text-white">{book.title}</h5>
+                                        <div className="w-full text-center mt-10">
+                                            <h5 className="font-bold text-lg text-white text-md">{book.title}</h5>
                                             <h5 className="font-bold text-lg text-white pt-8">{book.code}</h5>
                                         </div>
                                         {hoveredBookId === book?._id && (
@@ -134,7 +134,7 @@ export const AllBooks = ({ user, handleCloseModal: handleAuthCloseeModal, handle
                                 whileTap={{ scale: 0.9 }}
                                 className="px-4 py-3 text-white bg-buttonColor rounded-md text-lg font-medium"
                             >
-                                <Link href="/booklisting">
+                                <Link href="/home/booklisting">
                                     Start Exploring
                                 </Link>
                             </motion.button>

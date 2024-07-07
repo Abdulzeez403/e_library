@@ -1,21 +1,18 @@
 "use client"
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import React, { useEffect, useState } from 'react';
-import Image from "next/image"
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LuLayoutDashboard } from "react-icons/lu";
-import { FaUserTie } from "react-icons/fa6";
 import { PiExam } from "react-icons/pi";
-import User from "../../../public/user.png"
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Home, Package, Package2, PanelLeft, ShoppingCart, Users2 } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
-// import { SheetTrigger, SheetContent, Sheet } from '@/components/ui/sheet';
-// import { useAuthContext } from '@/app/(auth)/context';
+import { SheetTrigger, SheetContent, Sheet, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { LuHome } from "react-icons/lu";
 import { useAuthContext } from '../(auth)/context';
-// import Cookies from 'universal-cookie';
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
+
 
 
 interface IProps {
@@ -116,15 +113,6 @@ export const SidebarComponent = ({ children }: IProps) => {
                                 icon={<LuHome color="primary" />}
                             />
 
-
-
-
-
-
-
-
-
-
                         </Menu>
 
 
@@ -133,21 +121,67 @@ export const SidebarComponent = ({ children }: IProps) => {
 
 
                 <div style={{ display: "block", width: "100%", overflow: "auto" }}>
+
+
                     <div className="flex justify-between items-center px-4 py-2">
-                        <div onClick={() => setCollapsed(!collapsed)} className="hidden md:flex lg:flex" >
-                            <GiHamburgerMenu color="block" size={30} />
+                        {/* Hamburger Menu for Desktop */}
+                        <div onClick={() => setCollapsed(!collapsed)} className="hidden md:flex lg:flex">
+                            <GiHamburgerMenu color="black" size={30} />
                         </div>
 
+                        {/* Full Menu for Mobile and Logout Button */}
 
+                        {/* Mobile Menu Trigger */}
+                        <div className="flex md:hidden lg:hidden">
+                            <Sheet>
+                                <SheetTrigger>
+                                    <HiOutlineMenuAlt2 color="orange" size={30} />
+                                </SheetTrigger>
+                                <SheetContent>
+                                    <SheetHeader>
+                                        <SheetTitle className="font-bold text-buttonColor">EDT-Library</SheetTitle>
+                                        <div className="block items-center">
+                                            <Menu>
+                                                <CustomMenuItem
+                                                    link={"/profile"}
+                                                    title="Dashboard"
+                                                    suffix
+                                                    icon={<LuLayoutDashboard color="primary" />}
+                                                />
+                                                <CustomMenuItem
+                                                    link={"/home/booklisting"}
+                                                    title="MyShelf"
+                                                    suffix
+                                                    icon={<PiExam color="primary" />}
+                                                />
+                                                <CustomMenuItem
+                                                    link={"/profile/profile"}
+                                                    title="Profile"
+                                                    suffix
+                                                    icon={<LuLayoutDashboard color="primary" />}
+                                                />
+                                                <CustomMenuItem
+                                                    link={"/"}
+                                                    title="Home"
+                                                    suffix
+                                                    icon={<LuHome color="primary" />}
+                                                />
+                                            </Menu>
+                                        </div>
+                                    </SheetHeader>
+                                </SheetContent>
+                            </Sheet>
+                        </div>
 
-                        <div className="gap-x-4">
-
-
+                        {/* Logout Button */}
+                        <div>
                             <Button className="bg-buttonColor text-white" onClick={signOut}>LogOut</Button>
                         </div>
-
-
                     </div>
+
+
+
+
 
                     <div className="p-5 bg-slate-300 h-full">
                         {children}
