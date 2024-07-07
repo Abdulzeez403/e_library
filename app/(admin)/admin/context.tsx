@@ -176,11 +176,12 @@ export const AdminAuthProvider: React.FC<IProps> = ({ children }) => {
 
 
     const signOut = async () => {
-        cookies.remove('user');
-        cookies.remove('token');
-        router.push('/')
-        // window.location.reload();
-
+        try {
+            await cookies.remove('token');
+            router.push('/admin');
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
     };
 
 

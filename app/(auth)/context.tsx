@@ -156,12 +156,14 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
 
 
 
-
     const signOut = async () => {
-        await cookies.remove('token');
-        router.push('/')
-        // window.location.reload();
-
+        try {
+            await cookies.remove('token');
+            router.push('/');
+            window.location.reload();
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
     };
 
 

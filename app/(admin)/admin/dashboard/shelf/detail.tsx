@@ -19,7 +19,7 @@ export const MySelfDetail = () => {
             <div className=" p-4 rounded-md mb-4 flex justify-between items-center">
                 <h4 className="font-bold w-1/5">Title</h4>
                 <h4 className="font-bold w-1/5 text-center">Category</h4>
-                <h4 className="font-bold w-1/5 text-center">Course Code</h4>
+                <h4 className="font-bold w-1/5 text-center hidden md:flex lg:flex">Course Code</h4>
                 <h4 className="font-bold w-1/5 text-center">Delete</h4>
                 <h4 className="font-bold w-1/5 text-center">Download</h4>
             </div>
@@ -36,7 +36,7 @@ export const MySelfDetail = () => {
                             {doc?.category?.[0]}</p>
                     </div>
                     <div className="w-1/5">
-                        <p className="text-sm text-gray-600 text-center">
+                        <p className="text-sm text-gray-600 text-center  hidden md:flex lg:flex">
                             {doc?.code}</p>
                     </div>
 

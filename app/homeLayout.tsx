@@ -1,6 +1,4 @@
 "use client"
-import MlButton from './components/button';
-import { MdLogin } from "react-icons/md";
 import { useEffect, useState } from 'react';
 import { Menubar, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar';
 import Link from 'next/link';
@@ -10,7 +8,7 @@ import { SignUpForm } from './(auth)/signup';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { Button } from '@/components/ui/button';
-import { useUserContext } from './context';
+import { useAuthContext } from './(auth)/context';
 
 
 interface IProps {
@@ -24,6 +22,8 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
     const [toggle, setToggle] = useState(false);
 
     const [initials, setInitials] = useState('');
+
+    const { signOut } = useAuthContext();
 
     useEffect(() => {
         if (user?.name) {
@@ -127,8 +127,7 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
                                         (
                                             <div className=' flex justify-center mt-2' >
                                                 <Button onClick={() => {
-                                                    handleOpenModal();
-                                                    setToggle(false)
+                                                    signOut();
                                                 }} className='bg-[#F4683C]  text-white hover:text-[#F4683C]  hover:bg-white'>LogOut</Button> </div>) :
 
                                         (<div className=" flex justify-center">

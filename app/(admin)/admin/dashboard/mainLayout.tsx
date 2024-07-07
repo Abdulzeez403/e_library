@@ -232,9 +232,6 @@ export const SidebarComponent = ({ children }: IProps) => {
 
                                                 </Menu>
                                             </div>
-
-
-
                                         </SheetHeader>
                                     </SheetContent>
                                 </Sheet>
