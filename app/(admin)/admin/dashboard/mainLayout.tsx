@@ -144,12 +144,12 @@ export const SidebarComponent = ({ children }: IProps) => {
                                 icon={<FaUserTie color="primary" />}
                             />
 
-                            <CustomMenuItem
+                            {/* <CustomMenuItem
                                 link={"/"}
                                 title="Home"
                                 suffix
                                 icon={<LuHome color="primary" />}
-                            />
+                            /> */}
 
 
 
@@ -169,6 +169,8 @@ export const SidebarComponent = ({ children }: IProps) => {
 
                 <div style={{ display: "block", width: "100%", overflow: "auto" }}>
                     <div className="flex justify-between items-center px-4 py-2">
+
+
                         <div onClick={() => setCollapsed(!collapsed)} className="hidden md:flex lg:flex" >
                             <GiHamburgerMenu color="block" size={30} />
                         </div>
@@ -184,37 +186,51 @@ export const SidebarComponent = ({ children }: IProps) => {
                                         <SheetHeader>
                                             <SheetTitle className="font-bold text-buttonColor">EDT-Library</SheetTitle>
                                             <div className="block items-center">
-
                                                 <Menu>
                                                     <CustomMenuItem
-                                                        link={"/profile"}
+                                                        link={"/admin/dashboard"}
                                                         title="Dashboard"
                                                         suffix
                                                         icon={<LuLayoutDashboard color="primary" />}
                                                     />
                                                     <CustomMenuItem
-                                                        link={"/profile/myshelf"}
-                                                        title="MyShelf"
+                                                        link={"/admin/dashboard/upload"}
+                                                        title="Upload"
                                                         suffix
                                                         icon={<PiExam color="primary" />}
                                                     />
+
                                                     <CustomMenuItem
-                                                        link={"/profile/profile"}
-                                                        title="Profile"
+                                                        link={"/admin/dashboard/shelf"}
+                                                        title="Shelf"
                                                         suffix
-                                                        icon={<LuLayoutDashboard color="primary" />}
+                                                        icon={<LibraryBig className="w-6 h-6" />}
                                                     />
 
-
-
                                                     <CustomMenuItem
+                                                        link={"/admin/dashboard/profile"}
+                                                        title="Profile"
+                                                        suffix
+                                                        icon={<FaUserTie color="primary" />}
+                                                    />
+
+                                                    {/* <CustomMenuItem
                                                         link={"/"}
                                                         title="Home"
                                                         suffix
                                                         icon={<LuHome color="primary" />}
-                                                    />
-                                                </Menu>
+                                                    /> */}
 
+
+
+
+
+
+
+
+
+
+                                                </Menu>
                                             </div>
 
 
@@ -225,10 +241,10 @@ export const SidebarComponent = ({ children }: IProps) => {
                             </div>
 
 
-                            <Button className="bg-buttonColor text-white" onClick={signOut}>LogOut</Button>
                         </div>
 
 
+                        <Button className="bg-buttonColor text-white" onClick={signOut}>LogOut</Button>
                     </div>
 
                     <div className="bg-slate-200 h-full">

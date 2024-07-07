@@ -5,12 +5,13 @@ import { Button } from '@/components/ui/button'
 import { ResponsiveDrawerDialog } from '@/app/components/modal/responsivedrawer';
 import { UpdateForm } from './updateform';
 import { useAdminContext } from './context';
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 
 export default function Page() {
 
     const [open, setOpen] = useState(false);
 
-    const { getAdminProfile } = useAdminContext()
+    const { getAdminProfile, adminProfile: user } = useAdminContext()
     useEffect(() => {
         getAdminProfile()
     }, [])
@@ -23,25 +24,52 @@ export default function Page() {
         setOpen(true)
     }
     return (
-        <div>
-            <div>
-                <Image src="/book1.jpeg" alt="image" width={150} height={150} className='rounded-full' />
-                <div className='flex gap-x-2 pt-4'>
-                    <h4 className="border-2 rounded-md w-full p-2">Abdulazeez Sodiq</h4>
-                    <h4 className="border-2 rounded-md  w-full p-2">Admin</h4>
-                </div>
-                <div className='flex gap-x-2 pt-4'>
-                    <h4 className="border-2 rounded-md w-full p-2">AbdulazeezSodiq@gmail.com</h4>
-                    <h4 className="border-2 rounded-md  w-full p-2">Male</h4>
-                </div>
+        <div className="p-4">
 
-                <div className='flex gap-x-2 pt-4'>
-                    <h4 className="border-2 rounded-md w-full p-2">0983838883838</h4>
-                    <h4 className="border-2 rounded-md  w-full p-2">Male</h4>
-                </div>
+            <h4 className='py-4 font-bold'>Profile Info</h4>
+            <div className="w-full">
+                <Table className='border-2 border-white'>
+                    <TableBody className=''>
+                        <TableRow>
+                            <TableCell>
+                                <div className="font-medium">Name:</div>
+                            </TableCell>
+                            <TableCell>
+                                <div className="font-medium">{user?.name}</div>
+                            </TableCell>
+                        </TableRow >
+                        <TableRow>
 
-                <Button className="my-4 bg-orange-400 text-white" onClick={handleOpenModal}>Update Profile</Button>
+                            <TableCell>
+                                <div className="font-medium">Email:</div>
+                            </TableCell>
+                            <TableCell>
+                                <div className="font-medium">{user?.email}</div>
+                            </TableCell>
+                        </TableRow >
+
+                        <TableRow>
+                            <TableCell>
+                                <div className="font-medium">Gender:</div>
+                            </TableCell>
+                            <TableCell>
+                                <div className="font-medium">{user?.gender ? (<h4>{user?.gender}</h4>) : (<h4>Male</h4>)}</div>
+                            </TableCell>
+                        </TableRow >
+
+                        <TableRow>
+                            <TableCell>
+                                <div className="font-medium">Phone:</div>
+                            </TableCell>
+                            <TableCell>
+                                <div className="font-medium">{user?.phone}</div>
+                            </TableCell>
+                        </TableRow >
+
+                    </TableBody>
+                </Table>
             </div>
+
 
             <ResponsiveDrawerDialog
                 title="Update Profile"

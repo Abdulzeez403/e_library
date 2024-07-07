@@ -12,7 +12,6 @@ export const MySelfDetail = () => {
 
 
 
-    const { deleteDocument } = useDocumentContext()
 
     useEffect(() => {
 
@@ -27,7 +26,7 @@ export const MySelfDetail = () => {
                 <h4 className="font-bold w-1/5 text-sm md:text-md lg:text-md">Title</h4>
                 <h4 className="font-bold w-1/5 text-center  text-sm md:text-md lg:text-m">Category</h4>
                 <h4 className="font-bold w-1/5 text-center  text-sm md:text-md lg:text-m">Course Code</h4>
-                <h4 className="font-bold w-1/5 text-center  text-sm md:text-md lg:text-m">Delete</h4>
+                <h4 className="font-bold w-1/5 text-center  text-sm md:text-md lg:text-m">Download</h4>
                 {/* <h4 className="font-bold w-1/5 text-center">Download</h4> */}
             </div>
             {dashboardData?.accessedDocuments?.map((doc: any) => (
@@ -47,16 +46,10 @@ export const MySelfDetail = () => {
                             {doc?.code}</p>
                     </div>
 
+
+
+
                     <div className="w-1/5 block space-y-2">
-                        <div className='flex justify-center'
-                            onClick={() => deleteDocument(doc?._id)}>
-
-                            <Button className='bg-white border border-orange-300 text-orange-300'>Delete</Button>
-                        </div>
-                    </div>
-
-
-                    {/* <div className="w-1/5 block space-y-2">
                         <a
                             href={doc.document}
                             download={doc.title}
@@ -64,7 +57,7 @@ export const MySelfDetail = () => {
                         >
                             <Button className='bg-green-400 w-full hover:bg-[#F3F3F7]'>Download</Button>
                         </a>
-                    </div> */}
+                    </div>
                 </div>
             ))}
         </div>

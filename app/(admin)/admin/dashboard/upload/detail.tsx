@@ -71,13 +71,133 @@ export const UploadDetail = ({ handleOpenModal }: IProps) => {
     };
 
     return (
-        <div className="flex  justify-between">
+
+        // <div className=" block md:flex lg:flex  md:'justify-between  lg:'justify-between">
+
+
+        //     <Formik
+        //         initialValues={initialValues}
+        //         onSubmit={handleSubmit}
+        //     >
+        //         {({ values, handleChange, setFieldValue, isSubmitting }) => (
+        //             <Form className=" w-96 md:w-[50%]  lg:w-[50%]  border-2 rounded-md p-4 bg-white px-4">
+        //                 <FormField
+        //                     label="Title"
+        //                     name="title"
+        //                     className="my-4"
+        //                     onChange={(e) => {
+        //                         handleChange(e);
+        //                         setSelectedTitle(e.target.value);
+        //                     }}
+        //                 />
+        //                 <FormField
+        //                     label="Course Code"
+        //                     name="code"
+        //                     onChange={(e) => {
+        //                         handleChange(e);
+        //                         setSelectedCode(e.target.value);
+        //                     }}
+        //                 />
+        //                 <div className="my-4">
+        //                     <Select onValueChange={(val: any) => setSelectedCategory(val)}>
+        //                         <SelectTrigger className="">
+        //                             <SelectValue placeholder="Select Category" />
+        //                         </SelectTrigger>
+        //                         <SelectContent>
+        //                             {categories?.map((c: any) => (
+        //                                 <SelectItem key={c.name} value={c.name}>
+        //                                     {c.name}
+        //                                 </SelectItem>
+        //                             ))}
+        //                         </SelectContent>
+        //                     </Select>
+        //                 </div>
+
+        //                 {/* <FormField
+        //                     label="Cover"
+        //                     name="cover"
+        //                     onChange={(e) => {
+        //                         handleChange(e);
+        //                         setSelectedColor(e.target.value);
+        //                     }}
+        //                 /> */}
+
+        //                 <div className="my-4">
+        //                     <label htmlFor="description" className='font-semibold'>Description</label>
+        //                     <Field name="description" as="textarea" className="w-full h-24 border-2" />
+        //                 </div>
+
+        //                 {/* <FormField
+        //                     label="Description"
+        //                     name="description"
+        //                     type="textarea"
+        //                     onChange={handleChange}
+        //                 /> */}
+        //                 <div className="pt-2">
+        //                     <label htmlFor="document" className=" text-sm font-medium text-gray-700 hidden">Document</label>
+        //                     <div className="flex items-center">
+        //                         <input
+        //                             id="document"
+        //                             name="document"
+        //                             type="file"
+        //                             className="hidden"
+
+        //                             onChange={(e) => handleDocumentChange(e, setFieldValue)}
+        //                         />
+        //                         <button
+        //                             type="button"
+        //                             onClick={() => document.getElementById('document')?.click()}
+        //                             className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        //                         >
+        //                             Choose File
+        //                         </button>
+        //                         {documentFileName}
+        //                     </div>
+        //                 </div>
+
+        //                 <div>
+        //                     <CustomButton type="submit" loading={loading}>
+        //                         Upload
+        //                     </CustomButton>
+        //                 </div>
+        //             </Form>
+        //         )}
+        //     </Formik>
+
+
+        //     <div className="block bg-white w-96 md:w-[40%] lg:[40%]  border-2 rounded-md p-10 mt-4 md:mt-0 lg:mt-0 ">
+        //         <h4 className='font-bold text-center'>Lists of Category</h4>
+        //         {
+        //             categories.map((c, index) => (
+        //                 <div className='flex justify-between py-2' key={index}>
+        //                     <h4>{c.name}</h4>
+
+        //                     <div className="flex gap-x-4">
+        //                         {/* <FilePenLine color="skyblue" className="h-4 w-4 cursor-pointer" onClick={() => { updateCategoryById(c?.name, c._id) }} /> */}
+        //                         <Trash2 color="red" className="h-4 w-4  cursor-pointer "
+        //                             onClick={() => { deleteCategoryById(c?._id) }} />
+
+        //                     </div>
+
+        //                 </div>
+        //             ))
+        //         }
+
+        //         <div>
+        //             <Button className="bg-[#F4683C]" onClick={handleOpenModal}>Add Category</Button>
+        //         </div>
+        //     </div>
+
+
+        // </div>
+
+        <div className="block md:flex lg:flex md:justify-between lg:justify-between gap-4 p-4">
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
             >
                 {({ values, handleChange, setFieldValue, isSubmitting }) => (
-                    <Form className="w-[50%] border-2 rounded-md p-4 bg-white px-4">
+                    <Form className="w-full md:w-[50%] lg:w-[50%] border-2 rounded-md p-4 bg-white">
                         <FormField
                             label="Title"
                             name="title"
@@ -96,12 +216,12 @@ export const UploadDetail = ({ handleOpenModal }: IProps) => {
                             }}
                         />
                         <div className="my-4">
-                            <Select onValueChange={(val: any) => setSelectedCategory(val)}>
+                            <Select onValueChange={(val) => setSelectedCategory(val)}>
                                 <SelectTrigger className="">
                                     <SelectValue placeholder="Select Category" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {categories?.map((c: any) => (
+                                    {categories?.map((c) => (
                                         <SelectItem key={c.name} value={c.name}>
                                             {c.name}
                                         </SelectItem>
@@ -109,36 +229,18 @@ export const UploadDetail = ({ handleOpenModal }: IProps) => {
                                 </SelectContent>
                             </Select>
                         </div>
-
-                        {/* <FormField
-                            label="Cover"
-                            name="cover"
-                            onChange={(e) => {
-                                handleChange(e);
-                                setSelectedColor(e.target.value);
-                            }}
-                        /> */}
-
                         <div className="my-4">
-                            <label htmlFor="description" className='font-semibold'>Description</label>
+                            <label htmlFor="description" className="font-semibold">Description</label>
                             <Field name="description" as="textarea" className="w-full h-24 border-2" />
                         </div>
-
-                        {/* <FormField
-                            label="Description"
-                            name="description"
-                            type="textarea"
-                            onChange={handleChange}
-                        /> */}
                         <div className="pt-2">
-                            <label htmlFor="document" className=" text-sm font-medium text-gray-700 hidden">Document</label>
+                            <label htmlFor="document" className="text-sm font-medium text-gray-700 hidden">Document</label>
                             <div className="flex items-center">
                                 <input
                                     id="document"
                                     name="document"
                                     type="file"
                                     className="hidden"
-
                                     onChange={(e) => handleDocumentChange(e, setFieldValue)}
                                 />
                                 <button
@@ -151,7 +253,6 @@ export const UploadDetail = ({ handleOpenModal }: IProps) => {
                                 {documentFileName}
                             </div>
                         </div>
-
                         <div>
                             <CustomButton type="submit" loading={loading}>
                                 Upload
@@ -160,44 +261,26 @@ export const UploadDetail = ({ handleOpenModal }: IProps) => {
                     </Form>
                 )}
             </Formik>
-            {/* 
-            <div className="border-2 p-2 rounded-md flex justify-center items-center bg-white">
-                <div className={`w-70 h-[400px] rounded-md mx-4 ${selectedColor}`}>
-                    <div className="w-60 bg-red-300">
-                        <div className="mt-30">
-                            <h4 className="text-center font-bold text-lg">{selectedTitle}</h4>
-                            <h4 className="text-center">{selectedCode}</h4>
-                            {coverPreview && <img src={coverPreview} alt="Cover Preview" className="w-full h-auto" />}
-                            {documentFileName && <p className="text-center">{documentFileName}</p>}
+
+            <div className="block bg-white w-full md:w-[40%] lg:w-[40%] border-2 rounded-md p-10 mt-4 md:mt-0 lg:mt-0">
+                <h4 className="font-bold text-center">Lists of Category</h4>
+                {categories.map((c, index) => (
+                    <div className="flex justify-between py-2" key={index}>
+                        <h4>{c.name}</h4>
+                        <div className="flex gap-x-4">
+                            <Trash2
+                                color="red"
+                                className="h-4 w-4 cursor-pointer"
+                                onClick={() => { deleteCategoryById(c?._id) }}
+                            />
                         </div>
                     </div>
-                </div>
-            </div> */}
-
-            <div className="block bg-white w-[40%]  border-2 rounded-md p-10 ">
-                <h4 className='font-bold text-center'>Lists of Category</h4>
-                {
-                    categories.map((c, index) => (
-                        <div className='flex justify-between py-2' key={index}>
-                            <h4>{c.name}</h4>
-
-                            <div className="flex gap-x-4">
-                                <FilePenLine color="skyblue" className="h-4 w-4 cursor-pointer" onClick={() => { updateCategoryById(c?.name, c._id) }} />
-                                <Trash2 color="red" className="h-4 w-4  cursor-pointer "
-                                    onClick={() => { deleteCategoryById(c?._id) }} />
-
-                            </div>
-
-                        </div>
-                    ))
-                }
-
+                ))}
                 <div>
                     <Button className="bg-[#F4683C]" onClick={handleOpenModal}>Add Category</Button>
                 </div>
             </div>
-
-
         </div>
+
     );
 };

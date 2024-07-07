@@ -142,8 +142,16 @@ export const DocumentProvider: React.FC<IProps> = ({ children }) => {
     const deleteDocument = async (id: string) => {
         setLoading(true);
         try {
-            await axios.delete(`${API_BASE_URL}/document/${id}`);
+            const response = await axios.delete(`${API_BASE_URL}/document/${id}`,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'x-auth-token': token
+
+                    }
+                },);
             setDocuments((prev) => prev.filter((d) => d.id !== id));
+            notify.success(response.data.msg)
         } catch (error) {
             handleAxiosError(error);
         } finally {

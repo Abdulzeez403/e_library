@@ -7,7 +7,7 @@ import { useDocumentContext } from '../upload/context';
 
 export const MySelfDetail = () => {
 
-    const { getLatestDocuments, documents } = useDocumentContext();
+    const { getLatestDocuments, documents, deleteDocument } = useDocumentContext();
 
     useEffect(() => {
         getLatestDocuments();
@@ -19,8 +19,8 @@ export const MySelfDetail = () => {
             <div className=" p-4 rounded-md mb-4 flex justify-between items-center">
                 <h4 className="font-bold w-1/5">Title</h4>
                 <h4 className="font-bold w-1/5 text-center">Category</h4>
-                <h4 className="font-bold w-1/5 ">Course Code</h4>
-                <h4 className="font-bold w-1/5 text-center">Read</h4>
+                <h4 className="font-bold w-1/5 text-center">Course Code</h4>
+                <h4 className="font-bold w-1/5 text-center">Delete</h4>
                 <h4 className="font-bold w-1/5 text-center">Download</h4>
             </div>
             {documents.map((doc, index) => (
@@ -40,7 +40,8 @@ export const MySelfDetail = () => {
                             {doc?.code}</p>
                     </div>
 
-                    <div className="w-1/5 block space-y-2">
+                    <div className="w-1/5 block space-y-2"
+                        onClick={() => deleteDocument(doc?._id)}>
                         <div className='flex justify-center'>
 
                             <Button className='bg-white border border-orange-300 text-orange-300'>Delete</Button>

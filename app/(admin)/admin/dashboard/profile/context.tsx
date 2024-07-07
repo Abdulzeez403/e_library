@@ -6,6 +6,7 @@ import { notify } from '@/app/components/toast';
 
 interface AdminContextProps {
     dashboardData: any;
+    user: any;
     adminProfile: any;
     loading: boolean;
     getDashboardData: () => Promise<void>;
@@ -52,6 +53,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [dashboardData, setDashboardData] = useState<any>(null);
     const [adminProfile, setAdminProfile] = useState<any>(null);
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState('')
     const cookies = new Cookies()
     const token = cookies.get("token");
     const API_BASE_URL = 'https://e-library-nyh6.onrender.com/api';
@@ -107,6 +109,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return (
         <AdminContext.Provider
             value={{
+                user,
                 dashboardData,
                 adminProfile,
                 loading,
