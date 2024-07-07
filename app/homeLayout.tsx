@@ -39,7 +39,7 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
 
     return (
         <div className="bg-buttonColor">
-            <div className="flex justify-between px-10 py-4">
+            <div className="flex justify-between px-6 py-4">
                 <h3 className=' font-bold text-[1.3rem] text-white '>
                     <Link href="/">
                         EDT-Library
