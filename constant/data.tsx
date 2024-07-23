@@ -78,7 +78,8 @@ export interface IUser {
     email: string,
     gender: string,
     phone?: string,
-    role?: string
+    role?: string,
+    matric?: string
 
 }
 

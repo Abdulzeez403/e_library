@@ -20,6 +20,7 @@ export const MySelfDetail = () => {
                 <h4 className="font-bold w-1/5">Title</h4>
                 <h4 className="font-bold w-1/5 text-center">Category</h4>
                 <h4 className="font-bold w-1/5 text-center hidden md:flex lg:flex">Course Code</h4>
+                <h4 className="font-bold w-1/5 text-center hidden md:flex lg:flex">Level</h4>
                 <h4 className="font-bold w-1/5 text-center">Delete</h4>
                 <h4 className="font-bold w-1/5 text-center">Download</h4>
             </div>
@@ -38,6 +39,11 @@ export const MySelfDetail = () => {
                     <div className="w-1/5">
                         <p className="text-sm text-gray-600 text-center  hidden md:flex lg:flex">
                             {doc?.code}</p>
+                    </div>
+
+                    <div className="w-1/5">
+                        <p className="text-sm text-gray-600 text-center  hidden md:flex lg:flex">
+                            {doc?.level}</p>
                     </div>
 
                     <div className="w-1/5 block space-y-2"

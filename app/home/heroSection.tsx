@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export const HeroSection = () => {
     return (
-        <div className=' bg-buttonColor h-full py-20'>
+        <div className=' bg-buttonColor h-full py-14'>
 
             <div className=' mx-auto w-[80%] '>
 
@@ -15,7 +15,8 @@ export const HeroSection = () => {
                     <div className="container mx-auto flex flex-col-reverse md:flex-row items-center">
                         <div className="w-96 md:flex-1 md:w-0 lg:w-0 lg:flex-1 mt-10 md:mt-0">
                             <h1 className="text-4xl text-center md:text-5xl lg:text-6xl font-bold text-white mb-6 md:text-left lg:text-left">
-                                Welcome to EDT-Library
+                                Welcome to LuminaLibris (EDT)
+
                             </h1>
                             <p className="text-lg text-center md:text-xl md:text-left lg:text-left lg:text-2xl text-white mb-6">
                                 Explore our vast collection of materials across various categories and fuel your journey of learning and creativity.

@@ -13,6 +13,7 @@ export interface Document {
     category: string;
     cover: string;
     description: string;
+    level: string;
     document: File;
 
 }
@@ -79,6 +80,7 @@ export const DocumentProvider: React.FC<IProps> = ({ children }) => {
         const formData = new FormData();
         formData.append('title', doc.title);
         formData.append('code', doc.code);
+        formData.append('level', doc.level);
         formData.append('category', JSON.stringify(doc.category));
         if (doc.cover) formData.append('cover', doc.cover);
         if (doc.description) formData.append('description', doc.description);
@@ -109,6 +111,8 @@ export const DocumentProvider: React.FC<IProps> = ({ children }) => {
         const formData = new FormData();
         if (doc.title) formData.append('title', doc.title);
         if (doc.code) formData.append('code', doc.code);
+        if (doc.level) formData.append('level', doc.level);
+
         if (doc.category) formData.append('category', JSON.stringify(doc.category));
         if (doc.document) formData.append('document', doc.document);
 

@@ -42,7 +42,7 @@ const HomeLayout = ({ handleOpenModal, handleCloseModal, open, user }: IProps) =
             <div className="flex justify-between px-6 py-4">
                 <h3 className=' font-bold text-[1.3rem] text-white '>
                     <Link href="/">
-                        EDT-Library
+                        LuminaLibris (EDT)
                     </Link></h3>
 
                 <div className="hidden md:flex lg:flex">

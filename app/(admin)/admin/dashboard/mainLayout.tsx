@@ -110,7 +110,7 @@ export const SidebarComponent = ({ children }: IProps) => {
 
                         <div>
                             <h4 className="text-[#F4683C] font-bold text-[1.5rem] py-4 text-center">
-                                EDT-Library
+                                LuminaLibris (EDT)
 
                             </h4>
                         </div>
@@ -184,7 +184,7 @@ export const SidebarComponent = ({ children }: IProps) => {
                                     </SheetTrigger>
                                     <SheetContent>
                                         <SheetHeader>
-                                            <SheetTitle className="font-bold text-buttonColor">EDT-Library</SheetTitle>
+                                            <SheetTitle className="font-bold text-buttonColor">luminalibris (EDT)</SheetTitle>
                                             <div className="block items-center">
                                                 <Menu>
                                                     <CustomMenuItem

@@ -109,8 +109,7 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
             notify.success(response.data.msg);
         } catch (error: any) {
             setLoading(false);
-
-
+            notify.error(error.data.msg);
         }
     };
 

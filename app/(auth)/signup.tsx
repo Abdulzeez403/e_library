@@ -27,8 +27,9 @@ const SignUpFormValues = Yup.object().shape({
     gender: Yup.string().required('Required'),
     // u: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email address').required('Required'),
-    password: Yup.string().min(6, 'Must be at least 6 characters').required('Required'),
+    password: Yup.string().required('Password is Required'),
     phone: Yup.string().required('Required'),
+    matric: Yup.string().required("Matric is Required")
 
 
 });
@@ -43,7 +44,8 @@ export const SignUpForm: React.FC = () => {
         password: '',
         role: 'User',
         gender: 'Female',
-        phone: ""
+        phone: "",
+        matric: "",
 
     };
 
@@ -63,6 +65,7 @@ export const SignUpForm: React.FC = () => {
                 <Form>
                     <FormField label="Name" name="name" className="my-4" />
                     <FormField label="Email" name="email" className="my-4" />
+                    <FormField label="Matric" name="matric" className="my-4" />
                     <FormField label="Phone" name="phone" className="my-4" />
                     {/* <div className='w-full'>
                         <GenderSelect label="Gender" name="gender" />
