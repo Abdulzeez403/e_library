@@ -3,6 +3,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { notify } from '@/app/components/toast';
+import { useAdminAuthContext } from '../../context';
+import { useRouter } from 'next/navigation';
 
 interface AdminContextProps {
     dashboardData: any;
@@ -12,6 +14,8 @@ interface AdminContextProps {
     getDashboardData: () => Promise<void>;
     getAdminProfile: () => Promise<void>;
     updateAdminProfile: (profile: AdminProfile) => Promise<void>;
+    deleteAdmin: () => Promise<void>;
+
 }
 
 interface AdminProfile {
@@ -57,6 +61,9 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const cookies = new Cookies()
     const token = cookies.get("token");
     const API_BASE_URL = 'https://e-library-nyh6.onrender.com/api';
+    const router = useRouter();
+
+
 
 
     const getDashboardData = async () => {
@@ -101,6 +108,25 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         }
     };
 
+    const deleteAdmin = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.delete(`${API_BASE_URL}/admin/delete`, {
+                headers: { 'x-auth-token': token },
+            });
+            await cookies.remove('token');
+            router.push('/admin');
+            notify.success(response?.data?.msg)
+
+
+        } catch (error) {
+            console.error('Error fetching admin profile:', error);
+            notify.error("Somehing when wrong!")
+
+
+        }
+    };
+
     useEffect(() => {
         getDashboardData();
         getAdminProfile();
@@ -110,6 +136,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         <AdminContext.Provider
             value={{
                 user,
+                deleteAdmin,
                 dashboardData,
                 adminProfile,
                 loading,

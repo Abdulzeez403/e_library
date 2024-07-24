@@ -241,7 +241,8 @@ export const SidebarComponent = ({ children }: IProps) => {
                         </div>
 
 
-                        <Button className="bg-buttonColor text-white" onClick={signOut}>LogOut</Button>
+                        <Button className="bg-buttonColor text-white"
+                            onClick={() => signOut()}>LogOut</Button>
                     </div>
 
                     <div className="bg-slate-200 h-full">

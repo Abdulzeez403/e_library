@@ -11,7 +11,7 @@ export default function Page() {
 
     const [open, setOpen] = useState(false);
 
-    const { getAdminProfile, adminProfile: user } = useAdminContext()
+    const { getAdminProfile, adminProfile: user, deleteAdmin } = useAdminContext()
     useEffect(() => {
         getAdminProfile()
     }, [])
@@ -26,7 +26,12 @@ export default function Page() {
     return (
         <div className="p-4">
 
-            <h4 className='py-4 font-bold'>Profile Info</h4>
+            <div className="flex justify-between items-center">
+                <h4 className='py-4 font-bold'>Profile Info</h4>
+                <Button className="bg-red-400"
+                    onClick={() => deleteAdmin()}> Delete Account</Button>
+            </div>
+
             <div className="w-full">
                 <Table className='border-2 border-white'>
                     <TableBody className=''>
