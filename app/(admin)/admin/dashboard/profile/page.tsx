@@ -53,18 +53,12 @@ export default function Page() {
                             </TableCell>
                         </TableRow >
 
-                        <TableRow>
-                            <TableCell>
-                                <div className="font-medium">Gender:</div>
-                            </TableCell>
-                            <TableCell>
-                                <div className="font-medium">{user?.gender ? (<h4>{user?.gender}</h4>) : (<h4>Male</h4>)}</div>
-                            </TableCell>
-                        </TableRow >
+
 
                         <TableRow>
                             <TableCell>
                                 <div className="font-medium">Phone:</div>
+
                             </TableCell>
                             <TableCell>
                                 <div className="font-medium">{user?.phone}</div>
